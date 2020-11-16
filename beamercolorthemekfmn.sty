@@ -1,0 +1,60 @@
+\ProvidesPackageRCS $Header: beamercolorthemekfmn.sty,v 1.0 2007/10/18 15:43:01 mweiglh Exp $
+
+% Copyright 2007 by Martin Weiglhofer <weiglhofer@ist.Kfmn.at>
+% 
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+\definecolor{vgured}{rgb}{0.848,0.0,0.0}
+%\definecolor{vgublue}{rgb}{0.059,0.347,0.551}
+\definecolor{vgublue}{rgb}{0.172,0.332,0.543}
+\definecolor{vgugreen}{rgb}{0.61,0.73,0.35}
+\definecolor{vgumagenta}{rgb}{0.50,0.39,0.64}
+\definecolor{vguorange}{rgb}{0.97,0.59,0.27}
+\definecolor{vguyellow}{rgb}{0.922,0.926,0}
+
+\setbeamercolor{alerted text}{fg=vgured!75!black}
+\setbeamercolor*{palette primary}{fg=gray!60!black,bg=gray!30!white}
+\setbeamercolor*{palette secondary}{fg=vgured!70!black,bg=gray!15!white}
+\setbeamercolor*{palette tertiary}{bg=vgured!80!black,fg=gray!10!white}
+\setbeamercolor*{palette quaternary}{fg=vgured,bg=gray!5!white}
+
+\setbeamercolor*{sidebar}{fg=vgured,bg=gray!15!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=vgured!10!black}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{fg=vgured!50!black}
+\setbeamercolor*{palette sidebar quaternary}{fg=gray!10!white}
+
+%\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{titlelike}{parent=pallette primary,fg=gray}
+\setbeamercolor{frametitle}{fg=gray,bg=white}
+\setbeamercolor{frametitle right}{bg=gray!60!white}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor{block title}{use=structure,fg=white,bg=vgublue}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}
+%\setbeamercolor{block title alerted}{use=alerted text,fg=white, bg=vguyellow}
+\setbeamercolor{block title example}{use=vgugreen text,fg=white,bg=example text.fg!75!black}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+\setbeamercolor{itemize item}{fg=vgublue}
+\setbeamercolor{itemize subitem}{fg=vgublue}
+\setbeamercolor{itemize subsubitem}{fg=vgublue}
+
+%\setbeamercolor{section/subsection in toc}{fg=vgublue}
+\setbeamercolor{section in toc}{fg=black,bg=white}
+\setbeamercolor{subsection in toc}{fg=black,bg=white}
+
+\setbeamercolor{structure}{fg=vgublue}
+
+
+\mode
+<all>

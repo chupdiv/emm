@@ -1,0 +1,265 @@
+\ProvidesPackageRCS $Header: beamerthemekfmn.sty,v 1.0 2016/5/10 15:43:01 mweiglh Exp $
+
+% Copyright 2007 by Martin Weiglhofer 
+% Copyright 2016 by Dmitriy Chuprakov 
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\usepackage{tikz}
+\usetikzlibrary{
+				calc,
+				intersections,
+				positioning,
+				arrows,
+				shapes.geometric,
+				shapes,
+				mindmap,
+				trees,
+				backgrounds,
+				decorations.pathreplacing,
+				decorations.markings}
+\newcommand{\insertpicture}{}
+\newcommand{\titlepicture}[1]{\renewcommand{\insertpicture}{#1}}
+
+
+\newcommand{\insertdepartment}{}
+\newcommand{\department}[1]% 
+	{\renewcommand{\insertdepartment}{
+%		\CYRF\cyra\cyrk\cyru\cyrl\cyrt\cyre\cyrt\ 
+		#1
+	}
+  }
+
+\newcommand{\insertstudent}{
+{\usebeamercolor[fg]{subtitle} \CYRV\cyrery\cyrp\cyro\cyrl\cyrn\cyri\cyrl:}\\ \insertauthor
+}
+\newcommand{\insertadviser}{}
+\newcommand{\adviser}[1]{
+	\renewcommand{\insertadviser}{
+		{\usebeamercolor[fg]{subtitle} \CYRN\cyra\cyru\cyrch\cyrn\cyrery\cyrishrt\ \cyrr\cyru\cyrk\cyro\cyrv\cyro\cyrd\cyri\cyrt\cyre\cyrl\cyrsftsn:}
+		\\ #1
+	}
+}
+
+\newcount\beamer@sidebarskip
+\newcount\beamer@sidebar
+\beamer@sidebar=0
+
+\DeclareOptionBeamer{sidebar}{\beamer@sidebar=#1}
+\DeclareOptionBeamer{sidebarskip}{\beamer@sidebarskip=#1}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+%\definecolor{greyblue1}{rgb}{0.31,0.51,0.74}
+
+\useinnertheme[shadow=true]{kfmn}
+%\useinnertheme[shadow=true]{rounded}
+\ifnum\beamer@sidebar<1
+  \useoutertheme[nosidebar=\beamer@sidebarskip,hideothersubsections]{kfmn}
+\else
+  \useoutertheme[nosidebar=\beamer@sidebarskip,sidebar,hideothersubsections]{kfmn}
+\fi
+\usecolortheme{kfmn}
+
+%\setbeamertemplate{items}[default]
+\setbeamertemplate{sections/subsections in toc}[square]
+
+\setbeamerfont{block title}{size={}}
+\setbeamerfont{author in head/foot}{series=\bfseries}
+\setbeamerfont{date in head/foot}{series=\bfseries}
+\setbeamerfont{title in head/foot}{series=\bfseries}
+\setbeamerfont{title}{}
+\setbeamerfont{subtitle}{series*=}
+\setbeamerfont{author}{size=\normalsize, series*=}
+\setbeamerfont{date}{size=\normalsize, series*=}
+\setbeamerfont{adviser}{size=\small}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{pagenum in head/foot}{size*={5}{0}}
+
+\setbeamercolor{titlelike}{parent=structure,bg=white}
+\setbeamercolor{title}{parent=structure}
+\setbeamercolor{subtitle}{fg=black!50}
+\setbeamercolor{author}{fg =black, bg=white}
+\setbeamercolor{date}{parent = subtitle}
+
+\setbeamersize{text margin left=1.0cm}
+\setbeamersize{text margin right=1.0cm}
+%\setbeamertemplate{items}[square]
+
+\setbeamertemplate{frametitle}
+{~
+\hspace{-12mm}
+    \begin{tabular}[t]{lp{0.9\paperwidth}}
+      \begin{minipage}{0.1\paperwidth}
+      \insertlogo
+      \end{minipage}
+      &
+      \begin{minipage}{0.9\textwidth}
+      { %
+	    \insertframetitle \par
+      }
+      \end{minipage}
+      \tabularnewline
+%      \hline
+    \end{tabular}
+
+}
+
+\newcommand{\insertdiscipline}{}
+\newcommand{\discipline}[1]{\renewcommand{\insertdiscipline}{#1}}
+
+\newcommand{\VKR}{
+	\setbeamertemplate{title page}
+	{
+	\frametitle{\centering \usebeamerfont{institute}\insertinstitute\par
+	\insertdepartment\par
+	}
+
+		\tikzset{
+		  path image/.style={
+		    path picture={
+		      \node at (path picture bounding box.center) {
+		       \includegraphics[width=4cm]{titlepic.png}};}}
+		 }
+		\begin{tikzpicture}[remember picture, overlay]
+	    \node at (current page.south east){%
+	        \insertpicture};
+	    \end{tikzpicture}
+	
+		\vspace{-2cm}
+	    \par
+	
+		\vfill
+	{\centering 
+		\usebeamerfont{subtitle}\insertdiscipline\par
+
+		\medskip
+	 
+		\usebeamerfont{title}\inserttitle\par
+		\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+		\bigskip
+	}	
+		\vfill
+	
+		\usebeamerfont{author}
+		\insertstudent\par
+		\bigskip
+		\usebeamerfont{author}
+		\insertadviser\par
+		\vfill
+	{\centering 
+	  \usebeamerfont{date}\usebeamercolor[fg]{subtitle}\insertdate\par
+	}
+	}
+}
+
+
+\newcommand{\LECT}{
+\setbeamertemplate{title page}
+{
+	\frametitle{\centering \usebeamerfont{institute}\insertinstitute\par
+	\insertdepartment\par
+	}
+
+		\tikzset{
+		  path image/.style={
+		    path picture={
+		      \node at (path picture bounding box.center) {
+		       \includegraphics[width=4cm]{titlepic.png}};}}
+		 }
+		\begin{tikzpicture}[remember picture, overlay]
+	    \node at (current page.south east){%
+	        \insertpicture};
+	    \end{tikzpicture}
+
+
+%	\vspace{-2cm}
+    \par
+	\vfill
+ 
+	\usebeamerfont{subtitle}\insertdiscipline\par
+
+	\medskip
+ 
+	\usebeamerfont{title}\inserttitle\par
+	\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+	\bigskip
+	
+	\vfill
+	
+	\usebeamerfont{author}\insertauthor\par
+%  \usebeamerfont{date}\insertdate\par
+\vfill
+
+}
+
+
+}
+
+\newcommand{\REPORT}{
+\setbeamertemplate{title page}
+{
+	\frametitle{\centering \usebeamerfont{institute}\insertinstitute\par
+	\insertdepartment\par
+	}
+
+		\tikzset{
+		  path image/.style={
+		    path picture={
+		      \node at (path picture bounding box.center) {
+		       \includegraphics[width=4cm]{titlepic.png}};}}
+		 }
+		\begin{tikzpicture}[remember picture, overlay]
+	    \node at (current page.south east){%
+	        \insertpicture};
+	    \end{tikzpicture}
+
+
+%	\vspace{-2cm}
+    \par
+	\vfill
+ 
+%	\usebeamerfont{subtitle}\insertdiscipline\par
+
+	\usebeamercolor[fg]{subtitle}
+	\usebeamerfont{subtitle}
+	\insertsubtitle\par
+
+	\medskip
+ 
+	\usebeamercolor[fg]{title}
+	\usebeamerfont{title}
+	\inserttitle\par
+	
+	\bigskip
+	
+	\vfill
+
+	\usebeamercolor[fg]{author}
+	\usebeamerfont{author}
+	\insertauthor\par
+
+	{\small
+%	\usebeamerfont{author}
+
+	\bigskip
+	\usebeamerfont{adviser}
+	\insertadviser\par
+	}
+
+	\vfill
+	\usebeamercolor[fg]{date}
+	\usebeamerfont{date}
+	\insertdate\par
+\vfill
+
+}
+
+}
+
+
+\LECT
+\mode
+<all>
