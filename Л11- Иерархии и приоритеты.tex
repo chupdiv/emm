@@ -100,875 +100,1002 @@
 	\tableofcontents
 \end{frame}
 
-\end{document}
-\section{Проблема нескольких критериев}
 
-\begin{frame}{Проблемы многокритериальной оптимизации}{}
-\begin{enumerate}
-    \item Проблема нормализации критериев, то  есть приведение критериев к единому масштабу измерения.
-    \item Проблема выбора принципа оптимальности, то есть установление, в каком смысле оптимальное решение лучше всех остальных решений.
-    \item Проблема учета приоритетов критериев, возникающая в тех случаях, когда из экономического смысла критериев ясно, что некоторые из них имеют приоритет над другими. 
-    \item Проблема выбора метода вычисления оптимума задачи. 
-\end{enumerate}
-\begin{alertblock}{}
-    Многокритериальная задача может не иметь оптимального решения.
-\end{alertblock}
+\begin{frame}{}{}
+\begin{itemize}
+    \item Метод анализа иерархий (МАИ) разработан американским математиком Томасом Саати. Представляет собой математический инструмент системного подхода к сложным проблемам принятия решений, позволяет комплексно подойти к оценке конкурентоспособности товара, услуги предприятия. 
+    \item Метод анализа иерархий широко применяется в сфере управления качеством и конкурентоспособностью
+\end{itemize}
 \end{frame}
 
- \section{Каноническая двукритериальная задача оптимизации}
 
 
-\begin{frame}{Задача многокритериальной оптимизации}
+\begin{frame}{Задача принятия решений}{}
+    $$
+    \alert{X=\{A, K, S, I\}}
+    $$
     \begin{itemize}
-        \item Имеется область допустимых планов.
-        \item Есть несколько целевых функций.
-        \item Целевые функции не могут быть совмещены в одну.
-    \end{itemize}
-    \medskip
-    \hrule
-    \medskip
-    Требуется найти точку области допустимых решений, в которой достигается максимум (или минимум) всех целевых функций. 
-
-    \medskip
-    \hrule
-    \medskip
-    \alert{Важно:}
-    В оптимальном плане многокритериальной задачи каждый критерий в отдельности может не достигать своего оптимума.
-
-\end{frame}
-
-\begin{frame}{Каноническая двукритериальная задача оптимизации}{}
-    \begin{itemize}
-        \item Каждый из критериев максимизируется:
-        $$
-            F_1(x_1,x_2) \to \max, \qquad F_2(x_1,x_2) \to \max
-        $$
-        \item Область допустимых планов задана системой ограничений в форме нестрогих неравенств.
-        $$  \left\lbrace
-            \begin{aligned}
-                h_1(x_1,x_2) \leqslant b_1\\
-                h_2(x_1,x_2) \leqslant b_2\\
-                &\cdots \\
-                h_n(x_1,x_2) \leqslant b_n\\
-            \end{aligned}
-            \right.
-        $$
+        \item[$A$~---] множество альтернатив (зависит от имеющейся базы знаний, новизны задачи);
+        \item[$K$~---] множество критериев оценки альтернатив (зависит от степени детализации задачи и требуемого качества ее решения);
+        \item[$S$~---] метод поиска (вывода) решения:
+        \begin{itemize}
+            \item способ выбора альтернатив, определяемый структурой предпочтений ЛПР;
+            \item метод (модель) оптимизации, обусловливающий способ агрегирования критериев. 
         \end{itemize}
-\end{frame}
-
-\begin{frame}{Сведение задачи к канонической форме}{}
-    Задача может быть поставлена по разному:
-
-    \begin{itemize}
-        \item $ F_1(x_1,x_2) \to \max, \qquad F_2(x_1,x_2) \to \max $
-        \item $ F_1(x_1,x_2) \to \alert{\min}, \qquad F_2(x_1,x_2) \to \max $
-        \item $ F_1(x_1,x_2) \to \alert{\min}, \qquad F_2(x_1,x_2) \to \alert{\min} $
-    \end{itemize}
-    \pause
-    \begin{block}{}
-        $$
-        F(x_1,x_2) \to \min \Longleftrightarrow \alert{G(x_1,x_2)= -F(x_1,x_2)} \to \max
-        $$
-    \end{block}
-
-    \bigskip
-    Если критерий минимизируется, то нужно умножить его на $-1$.
-\end{frame}
-
-\section{Множество Парето}
-
-\begin{frame}{Типы точек системы ограничений}
-  
-    {\centering
-    \begin{tikzpicture}[>=latex,x=2.5mm,y=1.2mm]
-        % \draw[dashed,thin,black!50] (0,0) grid (30,45);
-        \draw[->](0,0) -- (30,0) node[right]{$F_2$};
-        \draw[->](0,0) -- (0,45) node[left]{$F_1$};
-        \fill[vgublue]
-            (4,41) 
-            coordinate (1) 
-            % circle[radius=1.5pt]
-            % node[right]{\scriptsize 1}
-            
-            (20,25) 
-            coordinate (5) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize $B$}
-            (25,0) 
-            coordinate (30) 
-            % circle[radius=1.5pt]
-            % node[right]{\scriptsize 30}
-            (10,10) 
-            coordinate (A) 
-             circle[radius=1.5pt]
-             node[right]{\scriptsize $A$}
-
-             (2.1,15) 
-             coordinate (C) 
-              circle[radius=1.5pt]
-              node[left]{\scriptsize $C$}
- 
-            (18.85,14) 
-              coordinate (D) 
-               circle[radius=1.5pt]
-               node[right]{\scriptsize $D$}
-  
-              ;
-              
-            \filldraw[fill=vgublue, fill opacity=0.3, draw=vgublue,thick]
-            (1) .. controls +(3,-15) .. (5) .. controls +(-2,-15) .. (30)
-            .. controls +(-25,+3) .. (1)
-            ;            
-            
-            \fill[fill=vgured, fill opacity=0.5] (5) circle[radius=5mm];
-
-
-            \fill[fill=vgured, fill opacity=0.5] (A) circle[radius=5mm];
-
-            \fill[fill=vgured, fill opacity=0.5] (C) circle[radius=5mm];
-
-            \fill[fill=vgured, fill opacity=0.5] (D) circle[radius=5mm];
-
-    \end{tikzpicture}\par}
-    \begin{itemize}
-        \item \alert{$A$}~--- внутренняя точка;
-        \item \alert{$B$}~--- вершинная точка;
-        \item \alert{$C$}, \alert{$D$}~--- граничные точки.
+        \item[$I$~---] уровень информации. 
     \end{itemize}
 \end{frame}
-\begin{frame}{Оптимальность по Парето}
-   
+\begin{frame}{Подход к принятию решений}{}
+    \structure{Классический}
+
+    Каждый вариант решения $X$ оценивается неотрицательной  действительно-значной функцией выигрыша g(x).
+    $$
+        X_\text{опт} =\max g(x). 
+    $$
+    Применяется в детерминированной среде и условиях риска.
+
+    \medskip
+    \structure{Поведенческий}
+
+    Множество последствий каждого варианта $p(x)$ сравнивается с множеством допустимых последствий при решении данной проблемы $p_\text{д}(x)$. 
+    Применяется в условиях неопределенности
 \end{frame}
 
-\begin{frame}{Лучший план по Парето}
-    \begin{block}{Определеине}
-        \alert{План $A(x_1,x_2)$ лучше плана $B_(y_1,y_2)$ по Парето} ($A \succcurlyeq Y$), если 
-        $$
-         F_1(x_1,x_2) \geqslant F_1(y_1,y_2), \qquad F_2(x_1,x_2) \geqslant F_2(y_1,y_2) \qquad 
-         $$
-    \end{block}
-
-    \bigskip
-    ,,Всякое изменение, которое никому не приносит убытков, а~некоторым людям приносит пользу (по их собственной оценке), является улучшением``
-    
-    {\raggedleft \small Вильфредо Парето\\ (15 июля 1848 -- 20 августа 1923)\\ 
-    итальянский  инженер, экономист и социолог\par}
+\begin{frame}{Классический подход к выбору альтернатив}{}
+\begin{itemize}
+    \item Метод теории полезности
+    \item Метод взвешенной суммы оценок критериев 
+    \item Метод анализа иерархий
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Множество Парето}
+\begin{frame}[allowframebreaks]{Построение функции полезности}{}
+\begin{enumerate}
+    \item Провести опрос экспертов.
+    \item Построить одномерные функции полезности.
+    \item Провести ранжирование возможных исходов без взаимного сравнения альтернатив.
+    \item Построить многомерную функцию полезности как аддитивную или мультипликативную комбинацию одномерных функций.
+\end{enumerate}
 
-    План $A$~--- \alert{Парето-оптимальный решение}, если не существует такого плана $B$, что $B \succcurlyeq A$ по Парето.
+    \bigskip
+    \structure{Допущение:} критерии являются взаимно независимыми по полезности. 
+
+    \framebreak
+    \bigskip
+    \structure{Достоинство:} 
+    
+    \medskip
+    возможность оценки любого количества альтернативных вариантов с использованием полученной функции. 
     
     \bigskip
-    \begin{block}{}
-        \alert{Множество Парето}~--- множество  всех Парето-оптимальных решений задачи.
-    \end{block}
-    \bigskip
+    \structure{Недостатки:}
+    \begin{itemize}
+        \item необходимость привлечения значительных объемов информации; 
+        \item высокая трудоемкость;
+        \item исходная информация должна быть устойчивой. 
+    \end{itemize}
+    
+    
+\end{frame}
 
-  
-    Итак, \alert{множество Парето}~--- это множество допустимых планов  в~задаче многокритериальной оптимизации, для которых не существует другого допустимого плана, имеющей по всем критериям не худшие оценки и хотя бы по одному критерию~--- лучшие.
+
+\begin{frame}[allowframebreaks]{Построение функции полезности}{}
+    \begin{enumerate}
+        \item Определяется перечень альтернатив и перечень критериев.
+        \item Каждой альтернативе дается балльная оценка по каждому из критериев.
+        \item Критериям приписываются количественные веса, характеризующие их сравнительную важность. 
+        \item Определяется ценность альтернативы путем умножения весов на критериальные оценки с последующим суммированием. 
+        \item Выбирается альтернатива с наибольшим показателем ценности. 
+    \end{enumerate}
+    
+    \bigskip
+    \structure{Достоинство:} 
+    простота и удобство
         
+    \bigskip
+    \structure{Недостатки:}
+    отсутствие научного обоснования при определении весов критериев и альтернатив.                 
+\end{frame}
+    
+\begin{frame}[allowframebreaks]{Метод анализа иерархий}
 
+    \begin{alertblock}{План метода}
+    \begin{enumerate}
+        \item Декомпозиция проблемы: построение качественной модели проблемы в виде иерархии  включающей 
+        \begin{itemize}
+            \item цель,
+            \item альтернативные варианты достижения цели,
+            \item критерии оценки качества альтернатив.
+        \end{itemize}
+        \item Ранжирование критериев в соответствии с заданной шкалой предпочтений. 
+        \begin{itemize}
+            \item построение матрицы попарных сравнений,
+            \item проверка согласованности,
+            \item определение весов критериев.
+        \end{itemize}
+        \item Вычисление приоритетов по каждой альтернативе.            
+        \item Определение оптимальной альтернативы по совокупности критериев.
+    \end{enumerate}    
+    \end{alertblock}
+    \framebreak
+    \structure{Достоинства:} 
+    \begin{itemize}
+        \item метод позволяет найти  вариант, который наилучшим образом согласуется с~пониманием сути проблемы и требованиями к ее решению.
+        \item метод позволяет проверить качество субъективных оценок.
+    \end{itemize}
+
+    \bigskip
+    \structure{Недостатки:}
+        Вычислительно сложен.
     
 \end{frame}
 
-% \begin{frame}{Выбор Парето-оптимальных альтернатив при решении многокритериальной задачи}
+\section{Метод анализа иерархий}
+\subsection{Этап 1. Декомпозиция}
+
+\begin{frame}{Этап 1. Декомпозиция}{}
+    \begin{enumerate}
+        \item Определение глобальной цели
+        \item Определение промежуточных целей (подцелей)
+        \item Определение критериев достижимости промежуточных целей 
+        \item Формирование альтернатив    
+        \item Построение иерархической структуры.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Иерархическая структура}{}
+    \alert{Иерархическая структура}~--- представление проблемы принятия решений в виде графа:
+    \begin{itemize}
+        \item элементы располагаются по уровням;
+        \item на верхнем уровне находится цель принятия решения,
+        \item элементы нижнего уровня~--- варианты достижения цели (альтернативы); 
+        \item элементы промежуточных уровней~--- критерии или факторам, которые связывают цель с альтернативами;
+        \item каждый элемент, за исключением самого верхнего, зависит от одного или более выше расположенных элементов. 
+    \end{itemize}
+    \begin{block}{Полнота иерархии}
+        Иерархия считается \alert{полной}, если любой элемент заданного уровня функционирует как критерий для всех элементов нижестоящего уровня.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Иерархическая структура}{}
+    \centering
+    \begin{tikzpicture}[node distance=1.5cm]
+        \node[draw,fill=vgured!30] (target) at (4,3) {Цель};
+
+        \node[draw,fill=vgured!30] (subtarget1) at (2,2) {Подцель 1};
+        \node[draw,fill=vgured!30] (subtarget2) at (6,2) {Подцель 2};
+
+        \node [draw, align=center] 
+            (criteria1) at (0,0) {Критерий 1};
+    
+        \node [right = of criteria1.center, draw, align=center] 
+            (criteria2) {Критерий 2};
+    
+        \node [right = of criteria2.center, draw, align=center] 
+            (criteria3) {Критерий 3};
+    
+        \node [right = of criteria3.center, draw, align=center] 
+            (criteria4) {Критерий 4};
+        \node[draw,fill=vgugreen!50]  (alt1) at (0,-4)    {Альтернатива 1};
+        \node[draw,fill=vgugreen!50]  (alt2) at (4,-4)  {Альтернатива 2};
+        \node[draw,fill=vgugreen!50]  (alt3) at (8.1,-4)    {Альтернатива 3};
+    
+        \draw 
+            (target) 
+            edge (subtarget1)
+            edge (subtarget2)
+        ;
+
+        \draw 
+            (subtarget1) 
+            edge (criteria1.north)
+            edge (criteria2.north)
+            edge (criteria3.north)
+            % edge (criteria4.north)
+        ;
+        \draw 
+            (subtarget2) 
+            % edge (criteria1.north)
+            % edge (criteria2.north)
+            edge (criteria3.north)
+            edge (criteria4.north)
+        ;
+
+        \draw 
+            (alt1) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+        \draw 
+            (alt2) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+        \draw 
+            (alt3) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+    \end{tikzpicture}
+\end{frame}
+
+
+\subsection{Этап 2. Ранжирование критериев}
+% \begin{frame}{}
+    
+% \end{frame}
+
+% \begin{frame}{Отношение порядка}{}
 
 % \end{frame}
 
-\begin{frame}{Пример}{}
-    \begin{exampleblock}{}
-        Приближенно построить множество Парето для следующей задачи двухкритериальной оптимизации:
-    
-    $$  
-    \begin{aligned}
-        F_1 &= (x-2)^2+(y-1)^2 \to \max\\
-        F_2 &= -(x-5)^2 -(y-5)^2 \to \min\\
-    \end{aligned}
-        \qquad
-        D_X\colon 
-        \left\lbrace
-        \begin{aligned}
-            0 \leqslant &x \leqslant 5\\
-            1 \leqslant &y \leqslant 5    
-        \end{aligned}
-        \right.
-    $$
-\end{exampleblock}
-\pause
-Преобразуем задачу:
-
-$$  
-\begin{aligned}
-    G_1 &= F_1 = (x-2)^2+(y-1)^2 \to \max\\
-    G_2 &= -F_2 = (x-5)^2 + (y-5)^2 \to \max\\
-\end{aligned}
-    \qquad
-    D_X\colon 
-    \left\lbrace
-    \begin{aligned}
-        0 \leqslant &x \leqslant 5\\
-        1 \leqslant &y \leqslant 5    
-    \end{aligned}
-    \right.
-$$
-
+\begin{frame}{Этап 2. Ранжирование критериев}{}
+    \structure{Проблема:} как сравнить критерии между собой.
+    \begin{block}{Алгоритм ранжирования критериев}
+    \begin{enumerate}
+        \item Выбор шкалы ранжирования.
+        \item Формирование матрицы попарных сравнений критериев с использованием шкалы предпочтений одного сравниваемого объекта другому.
+        \item Вычисление весов критериев и нормализация оценок.
+        \item Оценка компонент собственного вектора каждого критерия
+        \item Оценка согласованности матрицы
+    \end{enumerate}
+\end{block}
 \end{frame}
 
-\begin{frame}{Пример. Cетка.}
-    Покроем множество допустимых значений сеткой с шагом~1:
-    
-    {\centering
-    \begin{tikzpicture}[>=latex]
-        \draw[dashed] (0,0) grid (6,6);
-        \draw[thick,->](0,0) -- (6.5,0) node[right]{$x$};
-        \draw[thick,->](0,0) -- (0,6.5) node[left]{$y$};
-        \filldraw[very thick, draw=vgublue, fill=vgublue, fill opacity=0.2](0,1) rectangle (5,5);
-        \foreach \x in {0,...,5}
-            \foreach \y in {1,...,5}
-            {
-                \pgfmathtruncatemacro{\lbl}{5*\x +\y};
-                \node[
-                    circle,
-                    draw=black,
-                    fill=vgured!40,
-                     minimum size=2
-                    ]
-                    (\lbl) at (\x, \y) {\tiny \phantom{;}};
-                \node[]
-                    () at (\x, \y) {\scriptsize\lbl};
-    
-            }
-    \end{tikzpicture}\par}
-\end{frame}
+\subsection{Ранговая шкала}
+\begin{frame}{Раногвая шкала}{}
+\begin{block}{Определение}
+    Порядковая (ранговая) шкала --- шкала, позволяющая указать последовательность носителей признака по степени выраженности признака. 
+\end{block}
 
-\begin{frame}{Пример. Вычисление критериев в узлах}
-\begin{tabular}{|c|c|c|c|c|c|c|}
-    \hline
-    \slashbox{$y$}{$x$} & 0& 1& 2& 3 & 4  & 5 \\
-    \hline
-    1 & \slashbox{4}{41} & \slashbox{1}{32} & \slashbox{0}{25} & \slashbox{1}{20} & \slashbox{4}{17}  & \slashbox{9}{16} \\
-    \hline
-    2 & \slashbox{5}{34} & \slashbox{2}{25} & \slashbox{1}{18} & \slashbox{2}{13} & \slashbox{5}{10}  & \slashbox{10}{~9} \\
-    \hline
-    3 & \slashbox{8}{29} & \slashbox{5}{20} & \slashbox{4}{13} & \slashbox{5~}{~~8} & \slashbox{8~~}{~5}  & \slashbox{13}{~4} \\
-    \hline
-    4 & \slashbox{13}{26} & \slashbox{10}{17} & \slashbox{9}{10} & \slashbox{10}{~5} & \slashbox{13}{~2}  & \slashbox{18}{~1} \\
-    \hline
-    5 & \slashbox{20}{25} & \slashbox{17}{16} & \slashbox{16}{9} & \slashbox{17}{~4} & \slashbox{20}{~1}  & \slashbox{25}{~0} \\
-    \hline
-\end{tabular}
+\medskip
+\alert{Порядковая шкала не позволяет установить как сильно выражен признак у одного носителя по сравнению с другим.}
+
+\structure{Выбор шкалы:}
 \begin{itemize}
-    \item \structure{cверху слева} $G_1 = (x-2)^2+(y-1)^2$
-    \item \structure{снизу справа} $G_2 = (x-5)^2+(y-5)^2$
+    \item шкала должна позволять эксперту улавливать разницу в оценках факторов;
+    \item эксперт должен быть уверенным во всех градациях своих оценок одновременно.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Пример. Множество достижимых значений $G$}
-  
-    {\centering
-    \begin{tikzpicture}[>=latex,x=2.5mm,y=1.6mm]
-        \draw[dashed,thin,black!50] (0,0) grid (30,45);
-        \draw[->](0,0) -- (30,0) node[right]{$G_1$};
-        \draw[->](0,0) -- (0,45) node[left]{$G_2$};
-        \fill[vgublue]
-            (4,41) 
-            coordinate (1) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 1}
-            
-            (5,34) 
-            coordinate (2) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 2}
+\begin{frame}{Типовая ранговая шкала}
+    \begin{tabular}{cp{9.2cm}}
+        \rowcolor{vgublue} \color{white}Ранг & \textcolor{white}{Описание степени превосходства}\tabularnewline
+        0 & Объекты не сравнимы \\
+        1 & Объекты одинаково важны \\
+        3 & Умеренное превосходство одного над другим \\
+        5 & Существенное превосходство одного над другим \\
+        7 & Значительное превосходство одного над другим \\
+        9 & Абсолютное превосходство одного над другим \\
+    \end{tabular}
 
-            (8,29) 
-            coordinate (3) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 3}
+    \bigskip
+    \structure{\hrule}
+    \bigskip
+    % \begin{block}{}
+    \begin{itemize}
+        \item $a_{ij}>1$ если у носителя~$i$  признак более выражен, чем у~носителя~$j$
+        \item $a_{ij}<1$ если у носителя~$j$  признак более выражен, чем у~носителя~$i$.
+        \item $a_{ij}= \frac{1}{a_{ji}}$, если признаки сравнимы.
+        \item $a_{ij}= a_{ji}=0$, если признаки несравнимы.
+    \end{itemize}
+    % \end{block}
 
-            (13,26) 
-            coordinate (4) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 4}
-
-            (20,25) 
-            coordinate (5) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 5}
-            %----
-            (1,32) 
-            coordinate (6) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 6}
-            
-            (2,25) 
-            coordinate (7) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 7}
-
-            (5,20) 
-            coordinate (8) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 8}
-
-            (10,17) 
-            coordinate (9) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 9}
-
-            (17,16) 
-            coordinate (10) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 10}
-            %----
-            (0,25) 
-            coordinate (11) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 11}
-            
-            (1,18) 
-            coordinate (12) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 12}
-
-            (4,13) 
-            coordinate (13) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 13}
-
-            (9,10) 
-            coordinate (14) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 14}
-
-            (16,9) 
-            coordinate (15) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 15}
-            
-            
-            %----
-            (1,20) 
-            coordinate (16) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 16}
-            
-            (2,13) 
-            coordinate (17) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 17}
-
-            (5,8) 
-            coordinate (18) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 18}
-
-            (10,5) 
-            coordinate (19) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 19}
-
-            (17,4) 
-            coordinate (20) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 20}            
-            
-            %----
-            (4,17) 
-            coordinate (21) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 21}
-            
-            (5,10) 
-            coordinate (22) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 22}
-
-            (8,5) 
-            coordinate (23) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 23}
-
-            (13,2) 
-            coordinate (24) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 24}
-
-            (20,1) 
-            coordinate (25) 
-            circle[radius=1.5pt]
-            node[right]{\scriptsize 25}
-           %----
-           (9,16) 
-           coordinate (26) 
-           circle[radius=1.5pt]
-           node[right]{\scriptsize 26}
-           
-           (10,9) 
-           coordinate (27) 
-           circle[radius=1.5pt]
-           node[right]{\scriptsize 27}
-
-           (13,4) 
-           coordinate (28) 
-           circle[radius=1.5pt]
-           node[right]{\scriptsize 28}
-
-           (18,1) 
-           coordinate (29) 
-           circle[radius=1.5pt]
-           node[right]{\scriptsize 29}
-
-           (25,0) 
-           coordinate (30) 
-           circle[radius=1.5pt]
-           node[right]{\scriptsize 30}
-        ;
-        \draw 
-            (11)--(6)--(1)--(2)--(3)--(4)--(5)--
-            (10)--(15)--(20)--(25)--(30)
-            (11)--(12)--(17)--(18)--(23)--(24)--(29)--(30);            
-
-
-        \draw[very thick, vgured]
-            (1)--(2)--(3)--(4)--(5)
-            (25)--(30);
-        
-        \fill [ vgured]
-            (1) circle[radius=2pt]
-            (2) circle[radius=2pt]
-            (3) circle[radius=2pt]
-            (4) circle[radius=2pt]
-            (5) circle[radius=2pt]
-            (30) circle[radius=2pt];
-        \fill [vgublue]
-            (25) circle[radius=2pt];
-
-
-    \end{tikzpicture}\par}
-\end{frame}
-
-\begin{frame}{Множество Парето}
-    
-    {\centering
-    \begin{tikzpicture}[>=latex]
-        \draw[dashed] (0,0) grid (6,6);
-        \draw[thick,->](0,0) -- (6.5,0) node[right]{$x$};
-        \draw[thick,->](0,0) -- (0,6.5) node[left]{$y$};
-        \filldraw[very thick, draw=vgublue, fill=vgublue, fill opacity=0.2](0,1) rectangle (5,5);
-        \foreach \x in {0,...,5}
-            \foreach \y in {1,...,5}
-            {
-                \pgfmathtruncatemacro{\lbl}{5*\x +\y};
-                \node[
-                    circle,
-                    draw=black,
-                    fill=white,
-                     minimum size=2
-                    ]
-                    (\lbl) at (\x, \y) {\tiny \phantom{;}};
-            }
-
-            % \draw[very thick]
-            %     (11) -- (12) -- (18) -- (24) -- (30)--(23) -- (17) -- (11);
-            % \node[circle,fill=vgured!50]
-            %     () at (11) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (12) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (18) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (24) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (30) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (23) {\tiny \phantom{;}};
-            % \node[circle,fill=vgured!50]
-            %     () at (17) {\tiny \phantom{;}};
-
-
-            \draw[line width= 6pt, draw opacity = 0.5,vgured]
-                (1) -- (2) -- (3) -- (4) -- (5)
-                (25) -- (30);
-            \node[circle,fill=vgured!50]
-                () at (1) {\tiny \phantom{;}};
-            \node[circle,fill=vgured!50]
-                () at (2) {\tiny \phantom{;}};
-            \node[circle,fill=vgured!50]
-                () at (3) {\tiny \phantom{;}};
-            \node[circle,fill=vgured!50]
-                () at (4) {\tiny \phantom{;}};
-            \node[circle,fill=vgured!50]
-                () at (5) {\tiny \phantom{;}};
-            \node[circle,fill=vgured!50]
-                () at (30) {\tiny \phantom{;}};
-
-        \foreach \x in {0,...,5}
-            \foreach \y in {1,...,5}
-            {
-                \pgfmathtruncatemacro{\lbl}{5*\x +\y};
-                \node[]
-                    () at (\x, \y) {\scriptsize\lbl};
-    
-            }
-            
-    \end{tikzpicture}\par}
 \end{frame}
 
 
+\begin{frame}{Матрица попарного сравнения критериев}{}
+    \noindent
+    \centering
+    \begin{tabular}{|>{\columncolor{vgublue!30}\rule[-5mm]{0pt}{12mm}}c|c|c|c|c|c|}
+        \hline
+        \rowcolor{vgublue!30}Критерии& I& II &  III & $\cdots$ & $n$\\
+        \hline
+        I & 1 & \cellcolor{yellow!30}$a_{12}$ & \cellcolor{yellow!30} $a_{13}$ &  $\cdots$ & \cellcolor{yellow!30} $a_{1n}$ \\
+        \hline
+        II & \cellcolor{red!30}  $a_{21}$ & 1 & \cellcolor{yellow!30} $a_{23}$ &$\cdots$ & \cellcolor{yellow!30} $a_{2n}$\\
+        \hline
+        III & \cellcolor{red!30}  $a_{31}$ & \cellcolor{red!30}  $a_{32}$ & 1 & $\cdots$ & \cellcolor{yellow!30} $a_{3n}$\\
+        \hline
+        $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$  \\
+        \hline
+        $n$ & \cellcolor{red!30} $a_{n1}$ & \cellcolor{red!30} $a_{n2}$ & \cellcolor{red!30} $a_{n3}$ & $\cdots$ & $1$\\
+        \hline
+    \end{tabular}
 
-\begin{frame}{Алгоритм построения множества Парето }{}
-    \structure{Пусть дана задача с двумя переменными и двумя критериями}
+    \medskip
+    Матрица сравнения критериев \alert{обратно симметричная.}
 
-    \begin{enumerate}
-        \item Построить систему ограничений.
-        \item Выбрать шаг сетки и отметить узлы этой сетки, лежащие внутри области допустимых планов.
-        \item Посчитать значение критериев $F_1,F_2$ в каждом узле. Отметить соответствующие точки в системе координат $OF_1F_2$.
-        \item Для задачи минимума отметить все точки такие, что ниже и левее них нет точек, соответствующих другим узлам сетки.
-         \item Для задачи максимума отметить все точки такие, что выше и праее них нет точек, соответствующих другим узлам сетки.
-         \item Соединить последовательно отмеченные точки.
-         \item Выделить соответствующие узлы сетки и соединить их в той же последовательности. Это и есть приближенная граница Парето.
-    \end{enumerate}
 \end{frame}
+\begin{frame}{Вектор приоритетов критериев}
 
-\section{Метод ограничений}
+    Ранжирование критериев, анализируемых с помощью , осуществляется на основании главных собственных векторов матрицы парных сравнений.
 
-\section{Метод идеальной точки}
-
-\begin{frame}{Идеальная точка}
-
-    \begin{block}{Определеине}
-        Идеальной точкой называют план, в котором все  критерии достигают своих оптимальных значений.
+    \begin{block}{Определение}
+        Число $\lambda$ называется \alert{собственным значением}, а ненулевой вектор-столбец $\vec{W}$~--- \alert{собственным вектором} квадратной матрицы $A$, если они связаны соотношением 
+        $$
+            \alert{A\overrightarrow{W}=\lambda\overrightarrow{W}.}
+        $$
     \end{block}
 
     \bigskip
-    \begin{itemize}
-        \item Если эта точка принадлежит достижимому множеству $G$, то множество Парето состоит только из этой точки.
-        \item Если идеальная точка не принадлежит~$G$~--- нужно найти точку множества Парето, наиболее близкую к идеальной.
-    \end{itemize}
+    Собственный вектор, отвечающий максимальному собственному значению, называется \alert{главным собственным вектором.}
 \end{frame}
 
-\begin{frame}{Пример}
-    \begin{exampleblock}{Пример решения двухкритериальной ЗЛП}
-        Найти значения переменных, при которых функции
-        $$
-        F_1 = 2x_1 + x_2 + 1,\qquad F_2 = x_1 - x_2 + 5
-        $$
-         достигают максимальных значений, если $x_1,x_2$ удовлетворяют системе ограничений
-        $$
-        \left\lbrace
-        \begin{aligned}
-            x_1+2x_2 &\leqslant 8,\\
-            0 \leqslant x_1 &\leqslant 6,\\
-            0 \leqslant x_2 &\leqslant 3.\\
-        \end{aligned}
-        \right.
-        $$
-    \end{exampleblock}
-\end{frame}
-
-\begin{frame}{Построение системы ограничеинй}
-    \begin{tikzpicture}[>=latex]
-        \draw[thin,black!40] (0,0) grid (9,5);
-        \draw[->](0,0) -- (9.5,0) node[right]{$x_1$};
-        \draw[->](0,0) -- (0,5.5) node[left]{$x_2$};
-        \fill[vgublue,opacity = 0.5] (0,0) -- (0,3) -- (2,3) -- (6,1) -- (6,0) -- cycle;
-        \draw[thick] (6,0) -- node[below,pos=0.8,sloped]{\small $x_1=6$} (6,5);
-        \draw[thick] (0,3) -- node[above,pos=0.8,sloped]{\small $x_2=3$} (9,3);
-        \draw[thick] (0,4) -- node[above,pos=0.52,sloped]{\small $x_1+3x_2=8$} (8,0);
-        \draw
-         (0,0) node[ left] {$O$} 
-         (0,3) node[left] {$A$}
-         (2,3) node[below] {$B$}
-         (6,1) node[above right] {$C$}
-         (6,0) node[below] {$D$};
-        
-    \end{tikzpicture}
-    
-\end{frame}
-
-\begin{frame}
-    \begin{itemize}
-        \item 
-        Построим  достижимое множество $G$ в пространстве признаков $F_1$, $F_2$
-        \item Каждой точке $(x_1,x_2)$ из области ограничений поставим в соответствие точку $F_1,F_2$ по правилу:
-        $$
-        \alert{
-        \begin{pmatrix}
-        F_1\\F_2 
-        \end{pmatrix} 
-        = 
-        \begin{pmatrix}
-        2x_1+x_2+1\\
-        x_1-x_2+5 
-        \end{pmatrix}
-        = 
-         \begin{pmatrix}
-        2 & 1\\
-        1  & -1
-        \end{pmatrix}
-        \cdot
-        \begin{pmatrix}
-        x_1\\
-        x_2 
-        \end{pmatrix}
-        +
-        \begin{pmatrix}
-        1\\
-        5 
-        \end{pmatrix}
-        }
-        $$
-
-        \item  в силу линейности проводимых преобразований многоугольник $OABCD$ в многоугольник $O'A'B'C'D'$:
-        $$
-        O'(1; 5),\quad A'(4; 2),\quad B'(8; 4),\quad C'(14; 10),\quad D'(13; 11).
-        $$
-    \end{itemize}
-    
-    % Таким образом, все точки, координаты которых удовлетворяют условиям L1= 2x1+x2+1 → max,  L2 = x1-x2+5 → max  и  (x1, x2) ϵ X, определяют на плоскости многоугольник A*B*C*D*E*. Следовательно, область допустимых решений  данной задачи в системе координат (пространстве критериев) представляет собою многоугольник A*B*C*D*E*.}
-\end{frame}
-
-\begin{frame}{Множество достижимых значений $G$}{}
-    \centering
-    \begin{tikzpicture}[>=latex,x=5mm,y=5mm]
-        \draw
-         (1,5) coordinate (O') node[above] {$O'$} 
-         (4,2) coordinate (A') node[below] {$A'$}
-         (8,4) coordinate (B') node[below] {$B'$}
-         (14,10) coordinate (C') node[right] {$C'$}
-         (13,11) coordinate (D')  node[above] {$D'$};
-
-        \draw[thin,black!40] (0,0) grid (15,13);
-        \draw[->](0,0) -- (15.5,0) node[right]{$x_1$};
-        \draw[->](0,0) -- (0,13.5) node[left]{$x_2$};
-        \filldraw[very thick, draw=black, fill=vgublue, fill opacity = 0.5] (O') -- (A') -- (B') -- (C') -- (D') -- cycle;
-        \node() at (8,6) {$G$};
-        \visible<2->{
-            \draw[very thick,vgured] (D')--(C');
-            \fill[vgured] (D') circle[radius=1.5pt];
-            \fill[vgured] (C') circle[radius=1.5pt];
-            \node[text width = 3cm, anchor=north west] () at (15,6) {\small $C'D'$~--- множество Парето для значений критериев};
-        }
-        \visible<3->{
-            \draw[dashed] 
-                (0,11) node[left]{11}-- (14,11)
-                (14,0) node[below]{14}-- (14,11);
-            \fill[fill=vgured, ]                
-                (14,11) circle[radius=1.5pt]coordinate (U') node[above right,vgured] {$U'$};
-                \node[text width = 3cm, anchor=north west] () at (15,10) {\small $U'(14,11)$~--- значения критериев в~идеальной точке};
-
-
-        }
-    \end{tikzpicture}
-    
-\end{frame}
-
-\begin{frame}{Задача поиска ближайшей точки}{}
-    {\centering
-    \begin{tikzpicture}[>=latex]
-        \clip (9,9) rectangle (15,13);
-        \draw
-         (1,5) coordinate (O') node[above] {$O'$} 
-         (4,2) coordinate (A') node[below] {$A'$}
-         (8,4) coordinate (B') node[below] {$B'$}
-         (14,10) coordinate (C') node[right] {$C'$}
-         (13,11) coordinate (D')  node[above] {$D'$};
-
-        \draw[thin,black!40] (0,0) grid (15,13);
-        \draw[->](0,0) -- (15.5,0) node[right]{$x_1$};
-        \draw[->](0,0) -- (0,13.5) node[left]{$x_2$};
-        \filldraw[very thick, draw=black, fill=vgublue, fill opacity = 0.5] (O') -- (A') -- (B') -- (C') -- (D') -- cycle;
-        \node() at (8,6) {$G$};
-        \visible<1->{
-            \draw[very thick,vgured] (D')--(C');
-            \fill[vgured] (D') circle[radius=1.5pt];
-            \fill[vgured] (C') circle[radius=1.5pt];
-            \node[text width = 3cm, anchor=north west] () at (15,6) {\small $C'D'$~--- множество Парето для значений критериев};
-        }
-        \visible<1->{
-            \draw[dashed] 
-                (0,11) node[left]{11}-- (14,11)
-                (14,0) node[below]{14}-- (14,11);
-            \fill[fill=vgured, ]                
-                (14,11) circle[radius=1.5pt]coordinate (U') node[above right,vgured] {$U'$};
-                \node[text width = 3cm, anchor=north west] () at (15,10) {\small $U'(14,11)$~--- значения критериев в~идеальной точке};
-        }
-    \end{tikzpicture}
-    \par}
-    
-    \medskip
-
-    Найдем  точку~$V'$, принадлежащую границе Парето и удаленную на наименьшее расстояние от идеальной точки~$U'$:
-
-    \begin{block}{}
-        \begin{itemize}
-            \item $V'(f_1,f_2)\in D'C' $
-            \item $|V'U'|= \sqrt{(f_1-f_{1u})^2+(f_2-f_{2u})^2} \to \min$
-        \end{itemize}
-    \end{block}
-\end{frame}
-\begin{frame}[allowframebreaks]{Вычисление ближайшей точки}{}
-    
-    \begin{itemize}
-        \item Обозначим $x=f_1$, $y=f_2$.
-        \item Заметим, что $x \in [13,14]$, $y \in [10,11]$.
-        \item Построим прямую  $C'D'\colon y=kx$\\ по точкам $C'(14,10)$ и~$D'(13,11)$: 
-        $$
-        \left\lbrace 
-        \begin{aligned}
-            10 &= k14+b\\
-            11 &= k13+b\\
-        \end{aligned}
-        \right.
-        \Longleftrightarrow
-        \left\lbrace 
-        \begin{aligned}
-            k &= -1\\
-            b &= 24\\
-        \end{aligned}
-        \right.
-        \Longleftrightarrow
-        C'D'\colon y=-x+24
-        $$
-    \item Рассмотрим целевую функцию~--- квадрат расстояния до $U'(14,11)$:
-        $$
-            \Phi(X,y) = (x-14)^2+(y-11)^2 
-        $$
-    \item Подставим $y=-x+24$ из ограничения:
-        $$
-            \Phi(x) = (x-14)^2+(-x+24-11)^2  = (x-14)^2 + (13-x)^2 \to \min
-        $$
-    \framebreak
-    \item Вычислим производную
-        $$
-            \Phi'(x) = 2(x-14) - 2(13-x) = 4x-54
-        $$
-    \item Найдем  стационарные точки
-        $$
-            \begin{gathered}
-                \Phi'(x) = 0,\\
-                4x-54    =0,\\
-                x    = 13.5 \in [13,14]\\
-            \end{gathered}
-        $$
-    \item Убеждаемся, что $x=13.5$~--- точка минимума.
-    \item Вычисляем координаты  точки $V'$:
+\begin{frame}{Вычисление собственного вектора}
+    Решим уравнение:
     $$
-    \left \lbrace\begin{aligned}
-        x &= 13.5\\
-        y &= -13.5+24 = 10.5
+    \alert{A\overrightarrow{W}=\lambda\overrightarrow{W}.}
+    $$
+
+    \begin{equation}
+        (A-\lambda E)\overrightarrow{W}=0. \tag{$*$}
+        \label{eq:1}
+    \end{equation}
+    
+    Это уравнение имеет \alert{ненулевое} решение только в случае, когда 
+    \begin{equation}
+        \det(A-\lambda E)=0 \tag{$**$}
+        \label{eq:2}
+    \end{equation}
+
+    \begin{itemize}
+        \item Собственные значения квадратной матрицы  могут быть вычислены как решения уравнения~\eqref{eq:2}.
+        \item Собственные векторы~--- как решение соответствующих однородных систем~\eqref{eq:1}.
+    \end{itemize}
+\end{frame}
+\begin{frame}[allowframebreaks]{Пример нахождения собственных векторов}
+    \begin{exampleblock}{Пример}
+        Для матрицы парных сравнений
+        $A=\begin{pmatrix}
+            1 & 1/4 & 1/2 \\
+            4 & 1 & 1/4 \\
+            2 & 4  & 1\\
+        \end{pmatrix}$
+        вычислить главный собственный вектор.
+    \end{exampleblock}
+    \begin{enumerate}
+        \item 
+        Составим уравнение $(A-\lambda E)\overrightarrow{W} = 0$
+        \begin{gather*}
+         \left[ \begin{pmatrix}
+            1 & 1/4 & 1/2 \\
+            4 & 1 & 1/4 \\
+            2 & 4  & 1\\
+        \end{pmatrix} 
+        - \lambda \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0  & 1\\
+        \end{pmatrix}
+        \right] \overrightarrow{W} = 0\\
+        \alert{\begin{pmatrix}
+               1-\lambda & 1/4 & 1/2 \\
+               4 & 1-\lambda & 1/4 \\
+               2 & 4  & 1-\lambda\\
+           \end{pmatrix} 
+        \overrightarrow{W} = 0}
+        \end{gather*}
+    \item 
+    Приравняем определитель к нулю:
+    \begin{multline*}
+     \det(A-\lambda E)
+     = \begin{vmatrix}
+           1-\lambda & 1/4 & 1/2 \\
+           4 & 1-\lambda & 1/4 \\
+           2 & 4  & 1-\lambda\\
+       \end{vmatrix} 
+       =\\
+       = -\frac{1}{8} (2\lambda-7)(4{\lambda^2} + 2\lambda+7)
+       =0
+    \end{multline*}
+    \item Решая это уравнение получаем $\lambda =\frac{7}{2}=3.5$ Это единственный действительной корень уравнения.
+    
+    \framebreak
+    \item Теперь подставим найденное собственное значение в~уравнение $(A-\lambda E)\overrightarrow{W} = 0$
+    $$
+    \begin{pmatrix}
+        1-\frac{7}{2}& 1/4 & 1/2 \\
+        4 & 1-\frac{7}{2} & 1/4 \\
+        2 & 4  & 1-\frac{7}{2}\\
+    \end{pmatrix} 
+    \begin{pmatrix}
+        w_1 \\ w_2 \\ w_3
+    \end{pmatrix} 
+    = 
+    \begin{pmatrix}
+        0 \\ 0 \\ 0
+    \end{pmatrix}     
+    $$
+    $$
+    \begin{pmatrix}
+        -\frac{5}{2}& 1/4 & 1/2 \\
+        4 & -\frac{5}{2} & 1/4 \\
+        2 & 4  & -\frac{5}{2}\\
+    \end{pmatrix} 
+    \begin{pmatrix}
+        w_1 \\ w_2 \\ w_3
+    \end{pmatrix} 
+    = 
+    \begin{pmatrix}
+        0 \\ 0 \\ 0
+    \end{pmatrix}     
+    $$    
+    \alert{$$
+    \left\lbrace
+    \begin{aligned}
+        -\frac{5}{2}w_1+ \frac{1}{4}w_2 + \frac{1}{2}w_3 &= 0 \\
+        4w_1 -\frac{5}{2}w_2 +  \frac{1}{4}w_3 &= 0 \\
+        2w_1 + 4w_2 -\frac{5}{2}w_3 &= 0\\
+    \end{aligned}
+    \right.
+    $$}
+    \framebreak 
+    \item Решая систему получим множество собственных векторов:
+    $$
+    \left\lbrace
+    \begin{aligned}
+        w_1 &= \frac{1}{4}\alpha\\
+        w_2 &= \frac{1}{2}\alpha\\
+        w_3 &= \alpha\\
     \end{aligned}
     \right.
     $$
-    \framebreak
-    \item Итак, оптимальные значения критериев $F_1=13.5$, $F_2=10.5$.
-    \end{itemize}
+    \item Вычислим нормированный вектор~--- вектор сумма куоординат которого равна 1: 
+    $$
+        \frac{1}{4}\alpha+\frac{1}{2}\alpha + \alpha= \alpha \frac{7}{4}=1
+    $$
+    \item Подставляя $\alpha=\frac{4}{7}$ получаем.
+        $$
+            \alert{\overrightarrow{W}_{\lambda_{\max} }=(w_1,w_2,w_3) = \left( \frac{1}{7}, \frac{2}{7},\frac{4}{7} \right)}
+        $$
+\end{enumerate}
+\framebreak
+
+Итак,  
+$$
+    \frac{1}{7} < \frac{2}{7} < \frac{4}{7},
+$$
+$$
+    w_1< w_2 < w_3.
+$$
+
+\bigskip
+Третья альтернатива наиболее предпочтительная, затем идет вторая и первая.
 \end{frame}
 
-\begin{frame}{Вычисление оптимального плана}
-    \begin{itemize}
-        \item Вспомним, что 
-        $$
-        F_1 = 2x_1 + x_2 + 1,\qquad F_2 = x_1 - x_2 + 5
-        $$
-        
-        \item Подставим в критерии $F_1=13.5$, $F_2=10.5$.
-        $$
-        \left\lbrace
-        \begin{aligned}
-            13.5 &= 2x_1 + x_2 + 1\\
-            10.5 &= x_1 - x_2 + 5    
-        \end{aligned}
-        \right.
-        $$
-        
-        \medskip
-        \hrule
-        \medskip
+\begin{frame}[allowframebreaks]{Вычисление весов критериев}
+    Для обратно симметричной матрицы есть более простой алгоритм.
 
-        \item Решаем систему и получаем оптимальный план: 
-        $$
-            \alert{
-            x_1 = 6,
-            \qquad
-            x_2 = 0.5
-            }
-        $$
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Построение системы ограничеинй}
-    \begin{tikzpicture}[>=latex]
-        \draw[thin,black!40] (0,0) grid (9,5);
-        \draw[->](0,0) -- (9.5,0) node[right]{$x_1$};
-        \draw[->](0,0) -- (0,5.5) node[left]{$x_2$};
-        \fill[vgublue,opacity = 0.5] (0,0) -- (0,3) -- (2,3) -- (6,1) -- (6,0) -- cycle;
-        \draw[thick] (6,0) -- node[below,pos=0.8,sloped]{\small $x_1=6$} (6,5);
-        \draw[thick] (0,3) -- node[above,pos=0.8,sloped]{\small $x_2=3$} (9,3);
-        \draw[thick] (0,4) -- node[above,pos=0.52,sloped]{\small $x_1+3x_2=8$} (8,0);
-        \draw
-         (0,0) node[ left] {$O$} 
-         (0,3) node[left] {$A$}
-         (2,3) node[below] {$B$}
-         (6,1) node[above right] {$C$}
-         (6,0) node[below] {$D$};
-        \draw[very thick, vgured] (6,1)--(6,0);
-        \fill[vgured] (6,0.5) circle[radius=1.5pt] node[right]{$V$};
-    \end{tikzpicture}
-    \begin{itemize}
-        \item \alert{$CD$}~--- граница Парето
-        \item \alert{$V(6,0.5)$}~--- оптимальный план.
-    \end{itemize}
-\end{frame}
-\begin{frame}[allowframebreaks]{Алгоритм решения двухкритериальной ЗЛП}{}
-    Пусть дана задача линейного программирования с двумя переменными $x_1,x_2$ и двумя ограничениями $F_1,F_2$.
-
+    \begin{block}{Алгоритм}
     \begin{enumerate}
-        \item Построить многоугольник допустимых планов  в системе $Ox_1x_2$. Обозначить его вершины.
-        \item Вычислить значения критериев $(F_1,F_2)$ в каждой вершине многоугольника допустимых планов. Построить эти точки в системе $OF_1F_2$.
-        \item В системе $OF_1F_2$ построить многоугольник достижимых значений критерия, соединив те точки, прообразы которых были соединены в системе $Ox_1x_2$. 
-        \item Построить границу Парето значений критериев.
-        \framebreak
-        \item Найти идеальную точку $U'$. Её координаты~--- максимальные возможные значения каждой из переменных.
-        \item Найти точку $V'(F^*_1,F^*_2)$~--- ближайшую к идеальной на границе Парето. Для этого минимизировать квадрат расстояния между $U'$ и~$V'$. \alert{Это оптимальные значения критериев для двухкритериальной задачи.}
-        \item Подставить $F^*_1,F^*_2$ в функции критериев и  \alert{найти оптимальный план}, решив систему линейных уравнений.
-        \item Отметить оптимальный план на множестве ограничений.
+        \item Перемножить  все  элементы  каждой  строки и извлечь    корень $n$-й степени,  где $n$~--- число элементов  в  строке:
+        $$
+            \alert{ y_i = \sqrt[n]{ \prod_{j=1}^n a_{ij} } }
+        $$
+        \item Нормировать  их  так,  чтобы  их  сумма  равнялась  единице: 
+        $$
+            \alert{ y_{i\text{н}} = \frac{y_i}{ \sum_{j=1}^n y_{j} } }
+        $$
     \end{enumerate}
+    \end{block}
+    \framebreak
+    \begin{itemize}
+        \item Вектор $( y_{1\text{н}},\ldots,y_{n\text{н}} )$~--- это  главный собственный вектор $\overrightarrow{W}_{\lambda_{\max} }$.
+        \item Величина $y_{i\text{н}} $~--- вклад критерия $A_i$ в достижение цели.
+    \end{itemize}
+
+    \structure{Пример:}
+    $$
+    A=\begin{pmatrix}
+        1 & 1/4 & 1/2 \\
+        4 & 1 & 1/4 \\
+        2 & 4  & 1\\
+    \end{pmatrix}
+    \to
+    \overrightarrow{W}_{\lambda_{\max} }=\begin{pmatrix}
+        \sqrt[3]{1\cdot 1/4\cdot 1/2} \\
+        \sqrt[3]{4 \cdot 1 \cdot 1/4} \\
+        \sqrt[3]{2 \cdot  4 \cdot 1}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1/2 \\
+        1\\
+        2\\
+    \end{pmatrix}    
+    $$
+    $$
+        \alert{\overrightarrow{W}_{\lambda_{\max} }}
+        = \frac{\vec{w}}{|\vec{w}|} 
+        = \frac{1}{1/2+1+2}\left(\frac{1}{2},1,2\right)
+        = \alert{\left( \frac{1}{7}, \frac{2}{7},\frac{4}{7}\right)}
+    $$
 \end{frame}
 
- \section{Резюме и источники}
-\begin{frame}{Резюме}
-	Теперь вы знаете:
-	\begin{enumerate}
-	\item 
-		Понятие многокритериальной задачи.
-	\item 
-		Понятие границы Парето.
-    \item 
-		Метод идеальной точки.
-	\end{enumerate}
-	
-	Вы должны уметь:
-	\begin{itemize}
-		\item 
-			Применять метод сетки для приближенного нахождения границы Парето.
-		\item 
-			Приводить многокритериальную задачу к каноническому виду.
-		\item 
-			Решать многокритериальные задачи линейного программирования методом идеальной точки.
-		\end{itemize}
-	
+\begin{frame}[allowframebreaks]{Согласованность матрицы}{}
+    \structure{Как хорошо мы построили матрицу попарных оценок?}
+    \begin{itemize}
+        \item Если $A_i$ предпочтительнее $A_j$, а $A_j$ предпочтительнее $A_k$, то $A_i$ предпочтительней $A_k$
+        \item Чем длинее цепочка предпочтительности
+        $$
+            A_i \prec A_{j_1} \prec A_{j_2}\ldots \prec A_{j_t} \prec A_{k}
+        $$
+        между $A_i$ и $A_k$, тем существеннее выражен признак у объекта $A_k$, чем у~$A_i$.
+    \end{itemize}
+
+    \begin{block}{Определение}
+        \alert{Полная согласованность} матрицы~--- выполнение двух свойств:
+        \begin{itemize}
+            \item $A_i\prec A_j$, а $A_j \prec A_k$, то $A_i \prec A_k$.
+            \item $\alert{a_{ij}a_{jk}=a_{ik}.}$
+        \end{itemize}
+    \end{block}
+    \framebreak
+        \begin{itemize}
+            \item Если матрица $A$ полностью согласована, то достаточно знать одну ее строку, чтобы вычислить все остальные. 
+            \item Полная согласованность обратно симметричной матрицы $n\times n$ эквивалентна требованию равенства 
+            $$
+               \alert{\lambda_{\max} =n }
+            $$
+            \item Если предпочтительность объектов оценена только по шкале Саати, то полная согласованность  не достижима.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Показатели согласованности}
+    \begin{itemize}
+        \item Максимальное собственное значение: 
+        $$
+           \Lambda = \begin{pmatrix}
+               \Lambda_1\\ \Lambda_2\\ \cdots \\ \Lambda_n 
+           \end{pmatrix} = A\cdot \overrightarrow{W}_{\lambda_{\max} },
+            \qquad
+            \alert{\lambda_{\max} = \sum_{i=1}^n \Lambda_i}          
+        $$
+        \item Индекс согласованности:
+        $\alert{ \text{ИС}= \dfrac{\lambda_{\max}-n}{n-1} }$
+
+        \medskip
+        \item Случайная согласованность:
+        
+        \begin{tabular}{|>{\columncolor{vgublue!30}}c|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            $n$ & 1 & 2 & 3& 4& 5& 6& 7& 8 & 9 & 10\\
+            \hline
+            СС & 0 & 0 & 0.58 & 0.9& 1.12& 1.24& 1.32& 1.41 & 1.45 & 1.49\\
+            \hline
+        \end{tabular}
+        \medskip
+        \item Отношение согласованности:
+        $\alert{\text{ОС}= \dfrac{\text{ИС}}{\text{СС}}}  $
+    \end{itemize}
+\end{frame}
+\begin{frame}{Определение согласованности матирцы}
+    \begin{itemize}
+        \item \alert{$\text{ОС} \leqslant 0.1$}~--- матрица согласована 
+        \item \alert{$0.1 < \text{ОС} \leqslant 0.2$}~--- согласованность матрицы приемлема 
+        \item \alert{$\text{ОС}>0.2$}~--- согласованность матрицы неприемлема 
+    \end{itemize}
+\end{frame}
+\begin{frame}[allowframebreaks]{Пример. Cогласованность матирцы}
+    \begin{exampleblock}{}
+        Проверим согласованность матрицы  
+        $A=\begin{pmatrix}
+            1 & 1/4 & 1/2 \\
+            4 & 1 & 1/4 \\
+            2 & 4  & 1\\
+        \end{pmatrix}$ 
+    \end{exampleblock}
+    \begin{itemize}
+        \item Мы помним, что 
+        \alert{$\overrightarrow{W}_{\lambda_{\max} }
+        = \left( \frac{1}{7}, \frac{2}{7},\frac{4}{7}\right)
+        $}
+        \item Умножим матрицу $A$ на $\overrightarrow{W}_{\lambda_{\max} }$
+        $$
+           \alert{ \Lambda = A \cdot \overrightarrow{W}_{\lambda_{\max} } =
+            \begin{pmatrix}
+                1 & 1/4 & 1/2 \\
+                4 & 1 & 1/4 \\
+                2 & 4  & 1\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1/7\\
+                2/7\\
+                4/7\\
+            \end{pmatrix}
+            = 
+            \begin{pmatrix}
+                1/2\\
+                1\\
+                2\\
+            \end{pmatrix}
+           }
+            $$
+        \item Сложим координаты вектора: \alert{$\lambda_{\max}= \frac{1}{2}+1+2 = \frac{7}{2}$}
+        \framebreak
+        \item Вычислим индекс согласованности  
+        $$
+        \alert{\text{ИС}= \dfrac{\lambda_{\max}-n}{n-1} = \dfrac{7/2-3}{3-1}=\frac{1}{4}=0.25}
+        $$
+        \item По таблице найдем индекс случайной согласованности 
+        \alert{$\text{CС}= 0.58$}
+        \item Вычислим отношение согласованности
+        $\alert{\text{ОС}= \dfrac{\text{ИС}}{\text{СС}}} =\frac{0.25}{0.58} \approx 0.43$
+        \item  Так как \alert{$\text{ОС}=0.43>0.2$} матрица не согласована.
+    \end{itemize}
+    
+    \bigskip
+    \hrule
+
+    \bigskip
+    Итак, матрица  $A=\begin{pmatrix}
+        1 & 1/4 & 1/2 \\
+        4 & 1 & 1/4 \\
+        2 & 4  & 1\\
+    \end{pmatrix}$  не согласована.
 \end{frame}
 
-\begin{frame}{Литература}
-\begin{itemize}
-    \item \href{https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0_%D0%B8%D0%B5%D1%80%D0%B0%D1%80%D1%85%D0%B8%D0%B9}{Википедия. Метод анализа иерархий} 
-    \item 
-    	Все материалы по курсу здесь:
-        {\color{blue}\url{https://cloud.mail.ru/public/48BX/47oESuaQQ}}
-\end{itemize}
+\subsection{Этап 3. Приоритеты альтернатив по критериям}
+\begin{frame}{Этап 3. Приоритеты альтернатив по критериям}
+    \begin{itemize}
+        \item Альтернативы сравниваются попарно с целью получения локальных векторов приоритета по каждому критерию.
+        \item Строится матрица попарных сравнений $x_{ij}$ альтернатив~$i$ и~$j$ по  критерию $A_k$. (Помним, что $x_{ij}=\frac{1}{x_{ji}}$).
+        \item По построенной матрице вычисляется нормализованный вектор приоритеов по рассмотренной методике.
+    \end{itemize}
+    В результате получается вектор 
+    $$
+    \alert{
+    X^{(k)} = \begin{pmatrix}
+        X^{(k)}_{1\text{н}}\\ X^{(k)}_{2\text{н}}\\ \cdots \\ X^{(k)}_{m\text{н}}
+    \end{pmatrix}
+    }
+    $$
+
 \end{frame}
+
+\begin{frame}{Матрица попарного сравнения альтернатив}{}
+    \noindent
+    \centering
+    \begin{tabular}{|>{\columncolor{vgublue!30}\rule[-5mm]{0pt}{12mm}}c|c|c|c|c|c|}
+        \hline
+        \rowcolor{vgublue!30}Альтернативы& I& II &  III & $\cdots$ & $m$\\
+        \hline
+        I & 1 & \cellcolor{yellow!30}$x_{12}$ & \cellcolor{yellow!30} $x_{13}$ &  $\cdots$ & \cellcolor{yellow!30} $x_{1m}$ \\
+        \hline
+        II & \cellcolor{red!30}  $x_{21}$ & 1 & \cellcolor{yellow!30} $x_{23}$ &$\cdots$ & \cellcolor{yellow!30} $x_{2m}$\\
+        \hline
+        III & \cellcolor{red!30}  $x_{31}$ & \cellcolor{red!30}  $x_{32}$ & 1 & $\cdots$ & \cellcolor{yellow!30} $x_{3m}$\\
+        \hline
+        $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$  \\
+        \hline
+        $m$ & \cellcolor{red!30} $x_{m1}$ & \cellcolor{red!30} $x_{m2}$ & \cellcolor{red!30} $x_{m3}$ & $\cdots$ & $1$\\
+        \hline
+    \end{tabular}    
+\end{frame}
+
+\subsection{Этап 4. Приоритет альтернатив}
+\begin{frame}{Этап 4. Приоритет альтернатив}{}
+    {
+    \noindent
+    \centering
+    \begin{tabular}{|>{\columncolor{vgured!30}\rule[-2mm]{0pt}{7mm}}p{3.5cm}|c|c|c|c|c|>{\columncolor{vgured!30}}c|}
+        \hline
+        \rowcolor{vgublue!30}Критерии& $A_1$& $A_2$ &  $A_3$ & $\cdots$ & $A_n$ & Оценка\\
+        \hline
+        \rowcolor{vgugreen!30}Приоритет критерия& $y_{1\text{н}}$& $y_{2\text{н}}$ &  $y_{3\text{н}}$ & $\cdots$ & $y_{n\text{н}}$ & \\
+        \hline
+        Альтернатива I & $X^{(1)}_{1\text{н}}$ & $X^{(2)}_{1\text{н}}$ & $X^{(3)}_{1\text{н}}$ &  $\cdots$ & $X^{(n)}_{1\text{н}}$ & $A_1$\\
+        \hline
+        Альтернатива II & $X^{(1)}_{2\text{н}}$ & $X^{(2)}_{2\text{н}}$ & $X^{(3)}_{2\text{н}}$ &  $\cdots$ & $X^{(n)}_{2\text{н}}$ & $A_2$\\
+        \hline
+        Альтернатива III & $X^{(1)}_{3\text{н}}$ & $X^{(2)}_{3\text{н}}$ & $X^{(3)}_{3\text{н}}$ &  $\cdots$ & $X^{(n)}_{3\text{н}}$ & $A_3$\\        
+        \hline
+        $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$  & $\cdots$ \\
+        \hline
+        Альтернатива $m$ & $X^{(1)}_{m\text{н}}$ & $X^{(2)}_{m\text{н}}$ & $X^{(3)}_{m\text{н}}$ &  $\cdots$ & $X^{(n)}_{3\text{н}}$ & $A_m$\\        
+        \hline
+    \end{tabular}   
+    \par}
+    \bigskip
+    Оценка альтернативы $i$ вычисляется как скалярное произведение строки ,,\structure{Приоритет критерия}`` на строку ,,\structure{Альтернатива $i$}``:
+    $$
+        \alert{A_i= \sum_{j=1}^n X^{(j)}_{i\text{н}}}
+    $$
+\end{frame}
+
+\section{Пример }
+\begin{frame}{Пример}
+
+\begin{tabular}{|>{\columncolor{vgublue!20}}p{4cm}|c|c|c|}
+    \hline
+    \rowcolor{vgublue!20}& Проект 1 & Проект 2 & Проект 3\\
+    \hline
+    Вложения (млн. руб) & 5 & 5.5 & 4.5 \\
+    \hline
+    Срок реализации (лет) & 3 & 2 & 3 \\
+    \hline
+    Кол-во рабочих мест & 20 & 5 & 0 \\
+    \hline
+    Качество документации & среднее & низкое & высокое \\
+    \hline
+\end{tabular}
+
+\end{frame}
+
+
+\begin{frame}{Этап декомпозиции}{}
+\centering
+    \begin{tikzpicture}[node distance=1.5cm]
+        \node[draw,fill=vgured!30] (target) at (4,3) {Проект для реализации};
+
+        \node [draw, align=center] 
+            (criteria1) at (0,0) {Вложения\\{\phantom{р}}};
+
+        \node [right = of criteria1.center, draw, align=center] 
+            (criteria2) {Срок\\ реализации};
+
+        \node [right = of criteria2.center, draw, align=center] 
+            (criteria3) {Количество\\ рабочих мест};
+
+        \node [right = of criteria3.center, draw, align=center] 
+            (criteria4) {Качество\\ документации};
+        \node[draw,fill=vgugreen!50]  (alt1) at (0,-4)    {Проект 1};
+        \node[draw,fill=vgugreen!50]  (alt2) at (4,-4)  {Проект 2};
+        \node[draw,fill=vgugreen!50]  (alt3) at (8.1,-4)    {Проект 3};
+
+        \draw 
+            (target) 
+            edge (criteria1.north)
+            edge (criteria2.north)
+            edge (criteria3.north)
+            edge (criteria4.north)
+        ;
+
+        \draw 
+            (alt1) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+        \draw 
+            (alt2) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+        \draw 
+            (alt3) 
+            edge (criteria1.south)
+            edge (criteria2.south)
+            edge (criteria3.south)
+            edge (criteria4.south)
+        ;
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}{Ранжирование критериев}{}
+    \small
+        \begin{tabular}{|>{\columncolor{vgublue!20}}p{1.5cm}|>{\centering}p{1.5cm}|>{\centering}p{1.5cm}|>{\centering}p{1.5cm}|>{\centering}p{1.5cm}|>{\centering}p{1.5cm}|}
+            \hline
+            \rowcolor{vgublue!20}& Вложения & Срок реализации & Кол-во рабочих мест & Качество документации\tabularnewline
+            \hline
+            Вложения  & \visible<1->{$1$} & \cellcolor{yellow!40} \visible<2->{$3$} & \cellcolor{yellow!40} \visible<2->{$5$} & \cellcolor{yellow!40} \visible<2->{$9$} \tabularnewline
+            \hline
+            Срок реализации& \cellcolor{red!20} \visible<3->{$\dfrac{1}{3}$} & \visible<1->{$1$} & \cellcolor{yellow!40} \visible<2->{$3$} & \cellcolor{yellow!40} \visible<2->{$5$}\tabularnewline
+            \hline
+            Кол-во рабочих мест &   \cellcolor{red!20} \visible<3->{$\dfrac{1}{5}$}&  \cellcolor{red!20}  \visible<3->{$\dfrac{1}{3}$} & \visible<1->{$1$}  & \cellcolor{yellow!40} \visible<2->{$7$}\tabularnewline
+            \hline
+            Качество документации & \cellcolor{red!20} \visible<3->{$\dfrac{1}{9}$} &\cellcolor{red!20} \visible<3->{$\dfrac{1}{5}$}  &\cellcolor{red!20} \visible<3->{$\dfrac{1}{7}$} & \visible<1->{$1$} \tabularnewline
+            \hline
+        \end{tabular}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Пример. Вычисление весов критериев}
+    \small
+    \begin{tabular}{|>{\columncolor{vgublue!20}}p{1.2cm}|>{\centering}p{1.2cm}|>{\centering}p{1.2cm}|>{\centering}p{1.2cm}|>{\centering}p{1.2cm}|>{\centering\columncolor{vgugreen!30}}p{2cm}|}
+        \hline
+        \rowcolor{vgublue!20}& Вложения & Срок реализации & Кол-во рабочих мест & Качество документации & $y_i$  \tabularnewline
+        \hline
+        Вложения  & $1$ & $3$ & $5$ & $9$ & $\sqrt[4]{3\cdot 5\cdot 9} \approx 3.41$  \tabularnewline
+        \hline
+        Срок реализации& $1/3$ & $1$ & $3$ & $5$ & $\sqrt[4]{\frac{1}{3}\cdot 3 \cdot 5} \approx 1.50$\tabularnewline
+        \hline
+        Кол-во рабочих мест & $1/5$ & $1/3$ & $1$  & $7$ & $\sqrt[4]{\frac{1}{5}\cdot \frac{1}{3} \cdot 7} \approx 0.83$ \tabularnewline
+        \hline
+        Качество документации & $1/9$ & $1/5$  & $1/7$ & $1$ & $\sqrt[4]{\frac{1}{9}\cdot \frac{1}{5} \cdot \frac{1}{7}} \approx 0.24$ \tabularnewline
+        \hline
+    \end{tabular}
+    \framebreak
+    $$
+    W= 
+    \frac{1}{3.41+1.50+0.83+0.24}
+    \begin{pmatrix}
+        3.41 \\ 1.50\\ 0.83\\0.24
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0.57 \\ 0.25 \\ 0.14 \\ 0.04
+    \end{pmatrix}
+    $$
+
+    \bigskip
+    \structure{Согласованность}
+    \begin{itemize}
+    \item Умножим матрицу $A$ на $\overrightarrow{W}_{\lambda_{\max} }$
+    $$
+       \alert{ \Lambda = A \cdot \overrightarrow{W}_{\lambda_{\max} } =
+        \begin{pmatrix}
+            1 & 3 & 5 & 9 \\
+            1/3 & 1 & 3 & 5\\
+            1/5 & 1/3  & 1 & 7\\
+            1/9 & 1/5 & 1/78 & 1
+        \end{pmatrix}
+        \begin{pmatrix}
+           0.57\\
+            0.25\\
+            0.14\\
+            0.04
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            2.38\\
+            1.06\\
+            0.62\\
+            0.17
+        \end{pmatrix}
+       }
+        $$
+    \item Сложим координаты вектора: \alert{$\lambda_{\max}= 4.23$}
+    \framebreak
+    \item Вычислим индекс согласованности  
+    $$
+    \alert{\text{ИС}= \dfrac{\lambda_{\max}-n}{n-1} = \dfrac{4.23-4}{4-1}=0.077}
+    $$
+    \item По таблице найдем индекс случайной согласованности 
+    \alert{$\text{CС}= 0.9$}
+    \item Вычислим отношение согласованности
+    $\alert{\text{ОС}= \dfrac{\text{ИС}}{\text{СС}}} =\frac{0.077}{0.9} \approx 0.09<0.1$
+    \item  Матрица согласована.    
+    \end{itemize}
+    Итак, веса критериев
+    
+    \begin{tabular}{|p{1.6cm}|p{1.6cm}|p{1.6cm}|p{1.6cm}|p{1.6cm}|}
+        \hline
+        Критерий & Вложения & Срок реализации & Кол-во рабочих мест & Качество документации \\
+        \hline
+        Приоритет критерия  & $2.38$ & $1.06$ & $0.62$ & $0.017$ \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Требуемые вложения}
+    \begin{tabular}{c|ccc|cc}
+    \hline
+        Альтернативы & Проект 1 & Проект 2 & Проект 3 & $y_i$ & $y_{i\text{н}}$\\
+    \hline
+        Проект 1 & 1 & 7 & 9 & 1 & 0.258\\
+        Проект 2 & 1/7 & 1  & 3 & 0.405 & 0.105\\
+        Проект 3 & 1/9 & 1/3  & 1 & 2.466 & 0.637\\
+    \hline
+        Сумма & & & & 3.872 & 1\\
+    \hline
+    \end{tabular}
+    \structure{Согласованность.}
+    $$
+    \text{ИС}=0.019\qquad \text{CC}= 0.58,\qquad \text{ОС}=0.033
+    $$
+\end{frame}
+
+\begin{frame}{Сроки реализации}
+    \begin{tabular}{c|ccc|cc}
+    \hline
+        Альтернативы & Проект 1 & Проект 2 & Проект 3 & $y_i$ & $y_{i\text{н}}$\\
+    \hline
+        Проект 1 & 1 & 1/5 & 1 & 0.585 & 0.143\\
+        Проект 2 & 5 & 1  & 5 & 2.924 & 0.714\\
+        Проект 3 & 7 & 1/5  & 1 & 0.585 & 0.143\\
+    \hline
+        Сумма & & & & 4.094 & 1\\
+    \hline
+    \end{tabular}
+    \structure{Согласованность.}
+    $$
+    \text{ИС}=0\qquad \text{CC}= 0.58,\qquad \text{ОС}=0
+    $$
+\end{frame}
+\begin{frame}{Количество рабочих мест}
+    \begin{tabular}{c|ccc|cc}
+    \hline
+        Альтернативы & Проект 1 & Проект 2 & Проект 3 & $y_i$ & $y_{i\text{н}}$\\
+    \hline
+        Проект 1 & 1 & 7 & 9 & 3.979 & 0.785\\
+        Проект 2 & 1/7 & 1  & 3 & 0.754 & 0.149\\
+        Проект 3 & 1/9 & 1/3  & 1 & 0.333 & 0.066\\
+    \hline
+        Сумма & & & & 5.066 & 1\\
+    \hline
+    \end{tabular}
+    % \structure{Согласованность.}
+    % $$
+    % \text{ИС}=0\qquad \text{CC}= 0.58,\qquad \text{ОС}=0
+    % $$
+\end{frame}
+\begin{frame}{Качество документации}
+    \begin{tabular}{c|ccc|cc}
+    \hline
+        Альтернативы & Проект 1 & Проект 2 & Проект 3 & $y_i$ & $y_{i\text{н}}$\\
+    \hline
+        Проект 1 & 1 & 1/3 & 3 & 1 & 0.258\\
+        Проект 2 & 3 & 1  & 5 & 2.466 & 0.637\\
+        Проект 3 & 1/3 & 1/5  & 1 & 0.405 & 0.105\\
+    \hline
+        Сумма & & & & 3.871 & 1\\
+    \hline
+    \end{tabular}
+    % \structure{Согласованность.}
+    % $$
+    % \text{ИС}=0\qquad \text{CC}= 0.58,\qquad \text{ОС}=0
+    % $$
+\end{frame}
+
+
+\begin{frame}{Приоритет альтернатив}{}
+    {
+    \noindent
+    \centering
+    \begin{tabular}{|>{\columncolor{vgured!30}\rule[-2mm]{0pt}{7mm}}p{3.5cm}|c|c|c|c|>{\columncolor{vgured!30}}c|}
+        \hline
+        \rowcolor{vgublue!30}Критерии& $A_1$& $A_2$ &  $A_3$ & $A_4$ &  Оценка\\
+        \hline
+        \rowcolor{vgugreen!30}Приоритет критерия& $2.38$& $1.06$ &  $0.62$ & $0.02$ &  \\
+        \hline
+        Проект 1 & $0.258$ & $0.143$ & $0.785$ &   $0.258$ & $0.30$\\
+        \hline
+        Проект 2 & $0.105$ & $0.714$ & $0.149$ &  $0.637$ & $0.29$\\
+        \hline
+        Проект 3 & $0.637$ & $0.143$ & $0.066$ &  $0.105$ & \cellcolor{yellow!50} $0.41$\\        
+        \hline
+    \end{tabular}   
+    \par}
+    \vspace{3cm}
+    Итак, для нас оптимален проект 3.
+\end{frame}
+% \section{Резюме и источники}
+% \begin{frame}{Резюме}
+% 	Теперь вы знаете:
+% 	\begin{enumerate}
+% 	\item 
+% 		Понятие многокритериальной задачи.
+% 	\item 
+% 		Понятие границы Парето.
+%     \item 
+% 		Метод идеальной точки.
+% 	\end{enumerate}
+	
+% 	Вы должны уметь:
+% 	\begin{itemize}
+% 		\item 
+% 			Применять метод сетки для приближенного нахождения границы Парето.
+% 		\item 
+% 			Приводить многокритериальную задачу к каноническому виду.
+% 		\item 
+% 			Решать многокритериальные задачи линейного программирования методом идеальной точки.
+% 	\end{itemize}
+	
+% \end{frame}
+% % \begin{frame}{Литература}
+% % \begin{itemize}
+% %     \item \href{https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0_%D0%B8%D0%B5%D1%80%D0%B0%D1%80%D1%85%D0%B8%D0%B9}{Википедия. Метод анализа иерархий} 
+% %     \item 
+% %     	Все материалы по курсу здесь:
+% %         {\color{blue}\url{https://cloud.mail.ru/public/48BX/47oESuaQQ}}
+% % \end{itemize}
+% % \end{frame}
 
 \end{document}
