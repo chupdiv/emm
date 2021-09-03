@@ -1,0 +1,234 @@
+%encoding=utf8%
+\documentclass[a5paper,11pt]{extarticle}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,colorlinks,urlcolor=black, linkcolor=black, citecolor=black]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=9mm]{geometry}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{itemsep=1pt,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\textbf{\asbuk*)}, ref=(\asbuk*)} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+%\usepackage{ccfonts,eulervm}
+%\usepackage[math]{iwona}
+%\renewcommand{\sfdefault}{iwona}\normalfont
+%\renewcommand{\rmdefault}{pplx}\normalfont
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+
+
+\newcommand{\isShare}{\url{https://cloud.mail.ru/public/5tTJ/4DyNiAiTB}}
+\newcommand{\HEAD}[2]{
+	{\noindent\footnotesize Занятие \textnumero~#1  \hfill  Материалы курса: \isShare\par}
+	\hrule
+	\vspace{3mm}
+	{
+		\centering 
+		\bfseries \large #2\par
+		\par
+	}
+}
+\begin{document}
+{\centering \small Практические занятия \textnumero~6 \par\bfseries \large Системы линейных уравнений\par}
+
+\begin{enumerate}
+\item Решить СЛУ:\\
+\begin{enumerate*}
+	\item 
+	$\left\lbrace\begin{aligned}
+	2x-y-z &= 4,\\ 
+	3x+4y-2z &= 11,\\
+	3x-2y+4z &=11;
+      \end{aligned}\right.$
+	\item 
+ $\left\lbrace\begin{aligned}2x-3y+z-2 &=0,\\x+5y-4z+5 &=0,\\4x+y-3z+4
+	&=0; \end{aligned}\right.$ 
+	\item 
+	$\left\lbrace\begin{aligned}
+    -x_{1}+x_{2}+2x_{3} &= -5,\\ 
+    6x_{1}-2x_{2}+3x_{3} &= -7,\\
+    x_{1}+8x_{2}+5x_{3} &=  2;\\
+  \end{aligned}\right.$
+  
+%	\item 
+%	$\left\lbrace\begin{aligned}
+%    2x_{1}+2x_{2}-x_{3}+x_{4} &= 4,\\
+%    4x_{1}+3x_{2}-x_{3}+2x_{4} &= 6,\\
+%    8x_{1}+5x_{2}-3x_{3}+4x_{4} &= 12,\\
+%    3x_{1}+3x_{2}-2x_{3}+2x_{4} &= 6.
+%  \end{aligned}\right.$
+\end{enumerate*}
+
+{\raggedleft
+%\item[] %8
+
+		a) \underline{$(x,y,z)=(3,1,1)$},\quad
+		$\Delta=60$, \quad
+		$A^{-1}
+			=\frac{1}{60}
+			\begin{pmatrix}
+				12 & 6 & 6\\
+				-18 & 11 & 1\\
+				-18 & 1 & 11
+			\end{pmatrix}$
+		
+		б)
+		\underline{$(x,y,z)=(1,2,-3)$},\quad
+		$\Delta=107$, \quad
+		$A^{-1}
+			=\frac{1}{-2}
+			\begin{pmatrix}
+				-11 & -8 & 7\\
+				-13 & -10 & 9\\
+				-19 & -14 & 13
+			\end{pmatrix}$
+			
+		в)
+		\underline{$(x,y,z)=(1,2,-3)$},\quad
+		$\Delta=60$, \quad
+		$A^{-1}
+			=\frac{1}{60}
+			\begin{pmatrix}
+				-34 & 11 & 7\\
+				-27 & -7 & 15\\
+				50 & 9 & -4
+			\end{pmatrix}
+			$
+\par}
+
+\item
+	Из  некоторого  листового  материала  необходимо  выкроить  360  заготовок типа~\texttt{А},  300  заготовок  типа~\texttt{Б}  и  675  заготовок  типа~\texttt{В}.  При  этом можно применять  три  способа  раскроя.  При  первом  способе  раскроя  получается  3 заготовки типа~\texttt{А}, 1 заготовка типа~\texttt{Б} и 4 заготовки типа~\texttt{В}, при втором способе раскроя получается 2 заготовки типа~\texttt{А}, 6 заготовок типа~\texttt{Б} и 1 заготовка  типа~\texttt{В},  при  третьем  способе  раскроя  получается  1  заготовка  типа~\texttt{А},  2  заготовки типа~\texttt{Б} и 5 заготовок типа~\texttt{В}. Найти расход материала при каждом из указанных способов раскроя.
+	
+	{\raggedleft (90,15,60)\par}
+	
+%\item Решить методом Гаусса:\\
+%\begin{enumerate*}
+%\item 
+%	$\left\lbrace\begin{aligned}
+%	3x-5y &=13, \\
+%	2x+7y &= 81;
+%	\end{aligned}\right.$
+%\item 
+%	$\left\lbrace\begin{aligned}
+%		2x+y &= 5,\\
+%		x+3z &=16,\\
+%		5y-z &=10.
+%	\end{aligned}\right.$
+%\item 
+%   $\left\lbrace\begin{aligned}
+%    -x_{1}+x_{2}+2x_{3} &= -5\\ 
+%    6x_{1}-2x_{2}+3x_{3} &= -7\\
+%    x_{1}+8x_{2}+5x_{3} &=  2\\
+%  \end{aligned}\right.$;
+%  %(1,2,-3)
+%\end{enumerate*}
+
+\item Исследовать систему линейных уравнений и найти её решения:\\
+\begin{enumerate*}
+\item 
+	$\left\lbrace\begin{aligned}
+    9x_{1}-3x_{2}+5x_{3}+x_4 &= 6,\\
+    6x_{1}-2x_{2}+3x_{3}+2x_4 &= 4,\\
+    3x_{1}-x_{2}+3x_{3}+7x_4 &= 2;
+  \end{aligned}\right.$
+\item 
+	$\left\lbrace\begin{aligned}
+    x_{1}+x_{2}+3x_{3}-2x_4+3x_5 &= 1,\\
+    2x_{1}+2x_{2}+4x_{3}-x_4+3x_5 &= 2,\\
+    3x_{1}+3x_{2}+5x_{3}-2x_4+3x_5 &= 1,\\
+    2x_{1}+2x_{2}+8x_{3}-3x_4+9x_5 &= 2;\\
+  \end{aligned}\right.$\\
+	%%нет решений
+%\item 
+%	$\left\lbrace\begin{aligned}
+%    2x_{1}- x_{2}+ x_{3}+2x_4+ 3x_5 &= 2,\\
+%    6x_{1}-3x_{2}+2x_{3}+4x_4+ 5x_5 &= 3,\\
+%    6x_{1}-3x_{2}+4x_{3}+8x_4+13x_5 &= 9,\\
+%    4x_{1}-2x_{2}+ x_{3}+ x_4+ 2x_5 &= 1;\\
+%  \end{aligned}\right.$
+%	%% (a, b, 5-8a+4b,-3, 1+2a-b)
+\end{enumerate*}
+  
+{\raggedleft а) $(a,13+3a,-7,0)$ б) $\varnothing$\par}
+
+\newpage
+\item 
+	На предприятии имеется четыре технологических способа изготовления изделий~$A$ и~$B$ из некоторого сырья. В таблице указано количество изделий, которое может быть произведено из единицы сырья каждым из технологических способов:
+
+{\centering
+\begin{tabularx}{12cm}{>{\bfseries}c|CCCC}
+\hline
+ & \multicolumn{4}{c}{Выход из единицы сырья}\\
+Изделие  & I & II & III & IV\\
+\hline
+$A$ & 2 & 1 & 7 & 4\\
+$B$ & 6& 12& 2 & 3\\
+\hline
+\end{tabularx}
+\par}
+
+Найти количество сырья, которое следует переработать по каждой технологии, чтобы произвести 574~изделия~$A$ и~328~изделий~$B$ из 94\;ед. сырья.
+
+%\item[] %9
+{\raggedleft
+\underline{$
+(x_1,x_2,x_3,x_4) = (-\frac{12}{13} a, 14 + \frac{7}{26}a, 80 - \frac{9}{26} a, a)
+$}
+
+$
+	\left\lbrace
+	\begin{aligned}
+		x_1 + x_2 + x_3 + x_4 &= 94,\\
+		2x_1 + x_2 + 7x_3 + 4x_4 &= 574,\\
+		6x_1 +12x_2 +2x_3 + 3x_4 &= 328.\\
+	\end{aligned}
+	\right.
+$
+\par}
+
+\item 
+	Три судна доставили в порт 6000\;т чугуна, 4000\;т железной руды и 3000\;т апатитов. Разгрузку можно производить как непосредственно в железнодорожные вагоны для последующей доставки потребителям, так и на портовые склады. В вагоны можно разгрузить 8000\,т, а остаток груза придётся направить на склады.  Стоимость выгрузки одной тонны чугуна, железной руды и апатитов в~вагоны составляет соответственно $4{,}30$, $5{,}25$ и $2{,}20$\,ден.\,ед.
+Описать план разгрузки судов, если затраты на нее должны составить 58850\,ден.\,ед. Учтите, что поданные в порт вагоны не приспособлены для перевозки апатитов.
+
+{\raggedleft
+Чугун в вагоны/склад: 6000/0, руда: 2000/2000.\par
+}
+\end{enumerate}
+\newpage
+
+\end{document}

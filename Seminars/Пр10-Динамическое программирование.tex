@@ -1,0 +1,287 @@
+%encoding=utf8%
+\documentclass[a5paper,11pt]{extarticle}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm,landscape]
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage[pdftex]{graphicx}
+%\usepackage[pdftex,colorlinks,urlcolor=black, linkcolor=black, citecolor=black]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx,multirow,hhline}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=6mm]{geometry}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{itemsep=0pt,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+\begin{document}
+\begin{enumerate}
+  {\item[]\centering {\scriptsize Практическое занятие \textnumero~12 \par}
+          \bfseries Подготовка к балансовым моделям + задача о замене оборудования
+          \par\vspace{1mm}
+  }
+
+\item 
+	Для данных матриц найдите обратные матрицы или установите их отсутствие: \\
+	\begin{enumerate*}
+	\item 
+		$\begin{pmatrix}
+			3&-7\\
+			-2&5
+		\end{pmatrix}$;
+%	\item 
+%		$\begin{pmatrix}
+%		\cos\alpha & -\sin\alpha\\
+%		\sin \alpha & \cos\alpha
+%		\end{pmatrix}$;
+
+	\item 
+		${\begin{pmatrix}
+			2&-1& 0\\
+			2&3& -2\\
+			0&-2& 1\\
+		\end{pmatrix}}$;
+	\item 
+	$\begin{pmatrix}
+		2&2&3\\
+		1&-1&0\\
+		-1&2&1\\
+	\end{pmatrix}$;	
+\end{enumerate*}  
+  \item 
+  Решить СЛУ матричным методом:
+    $
+    \left\lbrace\begin{aligned}
+      5x+3y &= -11\\
+      3x-8y &= 62
+    \end{aligned}\right.
+    $.
+  \item 
+  Пусть экономическая система разбита на три отрасли. 
+  Использование продукции этих отраслей в них таково:
+
+{\centering  
+\begin{tabular}{c|ccc}
+	& \multicolumn{3}{c}{Потребление}\\
+	 Отрасль& I  & II & III\\
+	\hline
+	 I  & 30 & 50  & 80  \\
+	II  & 80 & 100 & 110 \\
+	III & 40 & 60  & 90 \\
+\end{tabular}\par}
+
+Выпуск отраслей задан вектором 
+$X = \begin{pmatrix} 250 & 400 & 270
+\end{pmatrix}^T$. 
+Найти размеры конечного потребления. 
+Вычислить  затраты продукции $i$-й отрасли на производство единицы продукции стоимости $j$-й отрасли.
+
+ 
+\item 
+	Найти оптимальную стратегию замены оборудования на период продолжительностью 7 лет, если для каждого года планового периода известны
+	$r(t)$~--- стоимость продукции, производимой с использованием этого оборудования ($t$~--- возраст оборудования); $u(t)$~--- эксплуатационные расходы; остаточная стоимость~--- 4~ден.\,ед., не зависящая от возраста оборудования и стоимость нового оборудования~--- 18~ден.\,ед., не меняющаяся в плановом периоде.  В начале периода оборудование имеет возраст 3 года
+	
+	{\centering \begin{tabular}{cccccccccccc}
+	\hline 
+$t$ &  0 &  1 &  2 &  3 &  4 &  5 &  6 &  7 &  8 &  9 &  10 \\
+\hline 
+$r(t)$ & 31 & 30 & 28 & 28 & 27 & 26 & 26 & 25 & 24 & 24 &  23 \\
+$u(t)$ &  8 &  9 &  9 & 10 & 10 & 10 & 11 & 12 & 14 & 16 &  18 \\
+\hline 
+\end{tabular}\par}
+
+
+{\item[] \bfseries Домашнее задание\par}
+\item 
+	Решить матричным методом СЛУ: 
+	$\left\lbrace\begin{aligned} 
+    	-5x+ 9y- 9z &= -4,\\
+    	-10x- 10y- 7z &= -171,\\
+		8x+ 5y+ 8z &= 123.
+   \end{aligned}\right.$
+
+По пособию Ряттель А.\,В. Основы экономико-математического моделирования.
+\item \textit{Динамическое программирование}: Упражнение 3 стр. 26.
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+%\item[2.1.] Завод имеет три цеха $A$, $B$ и $C$ и пять складов \textnumero~1, 2, 3, 4, 5. Цех $А$ производит 200 тыс. шт. изделий, цех $В$~--- 205~тыс.~шт., цех $C$~--- 225~тыс.~шт. Пропускная способность складов за то же время характеризуется следующими показателями; склад \textnumero~1~--- 190~тыс.~шт.,
+%склад \textnumero~2~--- 130~тыс.~шт., склад \textnumero~3~--- 80~тыс.~шт., склад \textnumero~4~--- 100~тыс.~шт., склад~\textnumero~5~--- 130~тыс.~шт. Стоимости перевозки 1~тыс.~шт. изделий из~цеха~$А$ в~склады No~1, 2, 3, 4, 5 соответственно равны~5, 7, 4, 9, 5~ден.~ед., из цеха $В$~--- 7, 4, 3, 4, 7 ден.~ед., а~из цеха $С$~– 9, 10, 6, 8, 7. Составьте такой план перевозки изделий, при котором расходы на перевозку изделий были бы наименьшими.
+
+%\item[2.2.] На трех складах А, В, С находится сортовое зерно соответственно 200, 300 и 100 т, которое надо доставить в четыре пункта: №~1~--- 150~т, №~2~--- 150~т, №~3~--- 250~т и №~4~--- 50~т.
+%Стоимости доставки 1~т со склада~А в указанные пункты соответственно равны 5, 4, 6, 3
+%ден. ед., со склада В~--- 1, 10, 2, 1 ден. ед. и со склада С~--- 2, 3, 3, 1 ден. ед. составьте опти-
+%мальный план перевозки зерна в четыре пункта, минимизирующий стоимость перевозок.
+
+
+%\item На предприятии имеется три группы станков, каждая из которых может выполнять пять операций по обработке деталей. 
+%Максимальное время работы каждой группы станков равно 100, 250, и 180 час. соответственно. 
+%Время выполнения каждой операции составляет 100, 120, 70, 110 и~130 час. соответственно. 
+%Определить, сколько времени и на какой операции нужно использовать каждую группу станков, чтобы обработать максимальное количество деталей. Производительность каждой группы станков на каждой операции заданы матрицей:
+%$$\begin{pmatrix}
+%3 & 5 & 11 & 10 & 5\\
+%5 & 10 & 15 & 3 & 2\\
+%4 & 8 & 6 & 12 & 10\\
+%\end{pmatrix}
+%$$
+
+
+%\item Существуют 4 базы $A_1$,$A_2$,$A_3$,$A_4$ и~4 торговые точки $B_1$, $B_2$, $B_3$, $B_4$. Расстояния от баз до торговых точек заданы матрицей:
+%$$
+%\begin{pmatrix}
+%10 & 20 & 12 & 5\\
+%3 & 14 & 9 & 1\\
+%13 & 8 & 6 & 9\\
+%7 & 15 & 8 & 10\\
+%\end{pmatrix}
+%$$
+%Нужно так прикрепить базы к~торговым точкам, чтобы суммарное расстояние было минимальным.
+
+%\item 
+%Мастер должен назначить на 4 типовых операций 4 рабочих. Время, которое затрачивают рабочие на выполнение каждой операции, приведено в таблице.
+%{\centering
+%\begin{tabular}{c|cccc}
+% & \multicolumn{4}{c}{Операции}\\
+%Рабочие & $O_1$ & $O_2$ & $O_3$ & $O_4$ \\ 
+%\hline
+%$P_1$ & 7 & 7 & 3 & 6 \\
+%$P_2$ & 4 & 9 & 5 & 4 \\ 
+%$P_3$ & 5 & 5 & 4 & 5 \\ 
+%$P_4$ & 6 & 4 & 7 & 2 \\ 
+%\end{tabular}
+%\par}
+%
+%Определите расстановку рабочих по операциям, при которой суммарное время на выполнение всех работ будет наименьшим. 
+\end{enumerate}
+\end{document}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\lint $
+\begin{aligned}
+ &F=2x_{1}+x_{2} \to \max \\
+ &x_{1} \geqslant 0, x_{2} \geqslant 0\\
+ &\left\lbrace
+  \begin{aligned}
+    x_{1}+3x_{2} &\leqslant 21\\
+    3x_{1}+2x_{2} &\leqslant 21\\
+    x_{1} &\leqslant 5\\
+  \end{aligned} 
+  \right.
+\end{aligned}$ 
+\hfil
+\lint  $
+\begin{aligned}
+   &F=4x_{1}+6x_{2} \to \min;\\ 
+  &x_{1} \geqslant 0,  x_{2} \geqslant 0;\\
+  &\left\lbrace\begin{aligned}
+    3x_{1}+ x_{2} &\geqslant 9;\\
+    x_{1}+ 2x_{2} &\geqslant 8;\\
+    x_{1}+6x_{2} &\geqslant 12;\\
+  \end{aligned} \right.
+\end{aligned}$\hfil\\[5mm]
+\lint  $
+\begin{aligned}
+   &F=2x_{1}-3x_{2} \to \min;\\ 
+  &x_{1} \geqslant 0,  x_{2} \geqslant 0;\\
+  &\left\lbrace\begin{aligned}
+    x_{1}+ x_{2} &\geqslant 4;\\
+    -x_{1}+ 2x_{2} &\leqslant 2;\\
+    x_{1}+2x_{2} &\leqslant 10;
+  \end{aligned} \right.
+\end{aligned}$\hfil
+\lint  $
+\begin{aligned}
+   &F=2x_{1}-6x_{2} \to \max;\\ 
+  &x_{1} \geqslant 0,  x_{2} \geqslant 0;\\
+  &\left\lbrace\begin{aligned}
+    x_{1}+ x_{2} &\geqslant 2;\\
+    -x_{1}+ 2x_{2} &\leqslant 4;\\
+    x_{1}+2x_{2} &\leqslant 8;
+  \end{aligned} \right.
+\end{aligned}$\hfil\\[5mm]
+\lint  $
+\begin{aligned}
+   &F=x_{1}+x_{2} \to \max;\\ 
+  &x_{1} \geqslant 0,  x_{2} \geqslant 0;\\
+  &\left\lbrace\begin{aligned}
+    x_{1}- 4x_{2} &\leqslant 0;\\
+    3x_{1}- x_{2} &\geqslant 0;\\
+    x_{1}+x_{2}-4 &\geqslant 0;
+  \end{aligned} \right.
+\end{aligned}$\hfil
+\lint  $
+\begin{aligned}
+   &F=x_{1}-x_{2} \to \max;\\ 
+  &x_{1} \geqslant 0,  x_{2} \geqslant 0;\\
+  &\left\lbrace\begin{aligned}
+    -2x_{1}+ x_{2} &\leqslant 2;\\
+    x_{1}- 2x_{2} &\leqslant -8;\\
+    x_{1}+x_{2} &\leqslant 5;
+  \end{aligned} \right.
+\end{aligned}$\hfil\\[5mm]
+\lint Составить двойственные задачи к каждому из заданий 1--4.\\
+\lint 

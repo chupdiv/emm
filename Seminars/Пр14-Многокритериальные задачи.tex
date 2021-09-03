@@ -1,0 +1,99 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm,landscape]
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage[pdftex]{graphicx}
+%\usepackage[pdftex,colorlinks,urlcolor=black, linkcolor=black, citecolor=black]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx,multirow,hhline}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=6mm]{geometry}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{itemsep=0pt,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+\begin{document}
+{\centering {\scriptsize Практическое занятие \textnumero~17 \par}
+\bfseries Многокритериальные задачи
+\par\vspace{1mm}
+}
+\begin{enumerate}
+    \item 
+    Химический комбинат планирует внедрить комплекс средств автоматизации (КСА) для системы управления технологическими процессами. Имеется возможность выбрать один из семи вариантов КСА (КСА1, КСА2, ..., КСА7). При выборе учитываются четыре критерия: затраты, связанные с изготовлением КСА и его вводом в эксплуатацию; срок ввода КСА в эксплуатацию; срок гарантийного обслуживания предприятием изготовителем; удобство КСА в эксплуатации. Характеристики КСА приведены в таблице:
+
+    {\centering \small
+    \begin{tabular}{|p{6cm}|c|c|c|c|c|c|c|}
+        \hline
+        Критерий & КСА1 & КСА2 & КСА3 & КСА4 & КСА5 & КСА6 & КСА7\\
+        \hline
+        Затраты, млн ден. ед. &
+        40 &  30 & 40 & 60 & 45 & 25 & 55 \\
+        \hline
+        Срок ввода в эксплуатацию, мес. & 
+        8 & 8 & 6 & 6 & 7 & 8 & 6 \\
+        \hline
+        Срок гарантийного обслуживания, лет &
+        4 & 4 & 5 & 7 & 4 & 4 & 5 \\
+        \hline
+        Удобство в эксплуатации &
+        Хор. & Отл.  & Удовл.  & Отл.  & Плохо  & Оч.~хор.  & Хор. \\
+        \hline
+    \end{tabular}
+    \par}
+
+    Критерии <<затраты>> и <<срок ввода в эксплуатацию>> подлежат минимизации, 
+    критерий <<срок гарантийного обслуживания>>~--- максимизации). 
+    Выбрать множество Парето.
+
+
+    \item  Решить линейную многокритериальную задачу методом идеальной точки:
+        $f_1=-x_1+3x_2 \to \max$, $f_2(x)=4x_1-x_2 \to \max$, при ограничениях
+        $-x_1+x_2 \leqslant 1$, $x_1+x_2 \geqslant 3$, $x_1-2x_2 \leqslant 0$ , $x_1 \leqslant 4$, $x_2 \leqslant 3$. 
+    
+    \item[] \textbf{Домашнее задание}
+   \item 
+    Решить линейную многокритериальную задачу:
+   $f_1=-2x+1 \to \max$, $f_2(x)=2y+3 \to \max$, при ограничениях
+   $0 \leqslant x \leqslant 1$, $ 0 y \leqslant 1$.  И при условии, что идеальная точка (точка утопии) известна и имеет координаты $M^*(5,7)$.
+   \item 
+    Решить предыдущую задачу при условии, что $f_2 \to \min$.
+   \item Задание 1 стр. 31 пособия А.\,В. Ряттель.
+%    \item Задание 2 стр. 32 пособия А.\,В. Ряттель.
+\end{enumerate}
+
+\end{document}	

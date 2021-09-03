@@ -1,0 +1,173 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+% \usepackage{pgfpages}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage[pdftex]{graphicx}
+%\usepackage[pdftex,colorlinks,urlcolor=black, linkcolor=black, citecolor=black]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx,multirow,hhline}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=8mm]{geometry}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{nosep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+\begin{document}
+\begin{enumerate}
+  {\item[]\centering {\footnotesize Практическое занятие \textnumero~28 \par}
+          \bfseries Биматричные игры
+          \par\vspace{1mm}
+  }
+
+\item 
+Предприятие должно определить ассортимент сезонной продукции. Точная величина спроса на продукцию неизвестна, но ожидается, что она может принять одно из пяти возможных значений:  $P_1$--$P_5$ в зависимости от погоды. Предприятие выбрало пять стратегий производства обеспечивающих  наилучший уровень предложения в данных условиях. Данная ситуация представлена в виде платежной матрицы игры.
+$$
+\begin{array}{c|ccccc}
+    & P_1 & P_2 &P_3 &P_4 &P_5 \\
+\hline
+A_1 & 48  & 9   & 15 & 87 & 6  \\     
+A_2 & 7   & 48  & 61 & 37 & 85 \\    
+A_3 & 42  & 78  & 10 & 95 & 66 \\     
+A_4 & 79  & 87  & 97 & 49 & 75 \\     
+A_5 & 45  & 5   & 31 & 58 & 64 \\   
+\end{array}
+$$
+Требуется определить наилучшую стратегию поведения предприятия на рынке:
+\begin{enumerate*}
+    \item Пользуясь критерием Вальда;
+    \item Пользуясь критерием Сэвиджа
+    \item считая, что ранее проведенные маркетинговые исследования  определили вероятности возникновения ситуаций  $P_1$--$P_5$: $q_1 =0.15$, $q_2 =0.2$, $q_3 =0.35$, $q_4 =0.25$, $q_5 =0.05$.
+\end{enumerate*}
+
+
+\item Найдите все равновесия по Нэшу в игре
+$$
+\begin{array}{c|cc}
+     & s & c \\
+     \hline
+    s & (1; 1) & (-2; -1) \\
+    c & (-1; -2) & (-1; -1) \\
+\end{array}
+$$
+
+\item (Всеобщность знания) В городе $N$ серы дома и хмуры... Там  живут игроки двух типов: «безумцы» и рациональные. При встрече в городе $N$ принято играть в игру из предыдущей задачи.
+Рациональные игроки играют стратегию, приносящую наибольший платеж, а безумцы --- стратегию $c$.
+Как-то случилось Пете попасть в этот город и встретится с одним рациональным аборигеном. Они никогда раньше не виделись и никогда больше не увидятся. Петя знает, что абориген --- рационален.
+Абориген знает, что Петя --- рационален. Петя ошибочно полагает, что абориген считает его безумцем. Абориген знает о Петиной ошибке.
+Какое из равновесий по Нэшу будет сыграно?
+
+\item
+Найти ситуации равновесные по Нэшу для следующих биматричных игр (вспомните, что в равновесных стратегиях игроки злонамеренны):
+$$
+\begin{array}{c|cc}
+    \text{\bfseries a)} & B_1 & B_2 \\
+     \hline
+    A_1 & (-7; -7) & (1; -9) \\
+    A_2 & (-9; 1) & (0; 0) \\
+\end{array}\qquad
+\begin{array}{c|ccc}
+    \text{\bfseries б)}& B_1    & B_2    & B_3\\
+    \hline
+A_1 & (2; 8) & (1; 4) & (9; 20) \\
+A_2 & (7; 7) & (6; 8) & (2; 4) \\
+\end{array}
+$$
+
+
+	    
+\item Двум воронам как-то бог послал по кусочку сыра. На ель вороны взгромоздясь одновременно выбирают: либо позавтракать своим кусочком, либо провести стремительное нападение на соседку и, похитив ее кусочек сыра, позавтракать в другом месте...
+$$
+\begin{array}{c|cc}
+     & \text{blitz krieg} & \text{breakfast} \\
+     \hline
+    \text{blitz krieg} & (-a; -a) & (2; 0) \\
+    \text{breakfast} & (0; 2) & (1; 1) \\
+\end{array}
+$$
+\begin{enumerate*}
+    \item Найдите все равновесия по Нэшу в этой игре;
+    \item Как зависит от параметра~$a$ вероятности блицкрига и завтрака в смешанном равновесии?
+\end{enumerate*}
+
+% \item Найдите все равновесные по Нэшу смешанные стратегии (вспомните, что в равновесных стратегиях игроки злонамеренны).
+% б) Какая стратегия является оптимальным ответом второго игрока на стратегию $l_2$ ?
+% в) Какая стратегия является оптимальным ответом второго игрока на стратегию $\frac{1}{3}l_1 + \frac{2}{3} l_2$ ?
+% \item 
+% На столе лежат 6 спичек. Игроки берут спички по очереди, каждый может взять 1 или 2 спички. Тот, кто берет последнюю спичку, проирывает 1 очко. Построить граф игры. Определить оптимальные стратегии игроков.
+
+\end{enumerate}
+\end{document}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\noindent\begin{enumerate*}
+  \item $
+  \begin{pmatrix}
+  1.5 & 3\\
+  2 & 1\\
+  \end{pmatrix}
+  $;
+  \item $
+  \begin{pmatrix}
+  -1 & 1 \\
+  1 & -1\\
+  \end{pmatrix}
+  $;
+  \item $
+  \begin{pmatrix}
+  -1 & 1 & -1 & 2\\
+  0 & -1 & 2 & -2\\
+  \end{pmatrix}
+  $;
+  \item $
+  \begin{pmatrix}
+  1 & 4 \\
+  3 & -2\\
+  0 & 5\\
+  \end{pmatrix}
+  $.
+  \end{enumerate*}

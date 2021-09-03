@@ -1,0 +1,157 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,colorlinks,urlcolor=blue, citecolor=magenta]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=9mm]{geometry}
+\usepackage[inline]{enumitem}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\begin{document}
+{\centering \small Практические занятия \textnumero~4--5 \par\bfseries \large Матрицы и определители\par}
+
+\begin{enumerate}
+\item 
+	Найдите~$3A-4B$ и $AB^T$для матриц $A=\begin{pmatrix} 1& 4& 0 \\-1& 2& -3 \end{pmatrix}$, $B=\begin{pmatrix} 1& 3& 5 \\ 4&-2& -9 \end{pmatrix}$.
+
+\item 
+	Три предприятия выпускают четыре вида продукции. Заданы матрицы помесячных выпусков:
+	$$
+	\begin{pmatrix}
+		2 & 3 & 1 & 2 \\
+		4 & 2 & 2 & 1 \\
+		5 & 4 & 4 & 2
+	\end{pmatrix},
+	\quad
+	\begin{pmatrix}
+		1 & 4 & 2 & 2 \\
+		3 & 3 & 3 & 2 \\
+		4 & 5 & 4 & 3
+	\end{pmatrix},
+	\quad
+	\begin{pmatrix}
+		2 & 5 & 3 & 1 \\
+		3 & 4 & 3 & 1 \\
+		4 & 4 & 4 & 4
+	\end{pmatrix}
+	$$
+Необходимо: 
+	\begin{enumerate*}
+	\item 
+		найти матрицу выпуска продукции за квартал;
+	\item 
+		найти матрицы $B_1$ и $B_2$ прироста выпуска продукции за каждый месяц и~проанализировать результаты.		
+	\end{enumerate*}
+
+\item Найдите 
+	\begin{enumerate*}
+	\item 
+		$\begin{pmatrix}2&1\\1&3\end{pmatrix}^3$;
+	\item 
+		$\begin{pmatrix}0&0&1\\1&1&2\\2&2&3\\3&3&4\end{pmatrix}
+		\begin{pmatrix}-1&-1\\2&2\\1&1\end{pmatrix}
+		\begin{pmatrix}4\\1\end{pmatrix}$
+	\end{enumerate*}
+
+\item 
+	В мастерскую, специализирующуюся на ремонте телефонов, поступают аппараты, из которых 70\% требуют малого ремонта, 20\%~--- среднего, 10\%~--- сложного.
+	Статистически установлено, что через год из аппаратов, прошедших малый ремонт, 10\% требуют малого ремонта, 60\%~--- среднего, 30\%~--- сложного; из аппаратов, прошедших средний ремонт,~--- 20\% малого, 50\%~--- среднего, 30\%~--- сложного; из аппаратов, прошедших сложный ремонт,~--- 60\% малого, 40\%~--- среднего. Найти доли из отремонтированных в начале года аппаратов, которые будут требовать ремонта того или иного вида через один, два, три года.
+
+%\item 
+%	Найдите все матрицы, перестановочные с $\begin{pmatrix} 1 & 2 \\ 3 &
+%		4\end{pmatrix}$.
+\item Для матриц 
+  $A=\begin{pmatrix}4&3&\\1&3\end{pmatrix}$ и 
+  $B=\begin{pmatrix}1&-2&\\-3&1\end{pmatrix}$
+  вычислите $|A|\cdot |B|$ и $|A\cdot B|$.
+\item Вычислите определители третьего порядка разными способами:\\
+\begin{enumerate*}
+	\item 
+		${\begin{vmatrix}-6&5&0\\0&-6&-2\\3&2&2\end{vmatrix}}$,
+	\item 
+		$\begin{vmatrix}2  &1  &3  \\5  &8  &2  \\3  &4  &2  \end{vmatrix}$,
+	\item 
+		$\begin{vmatrix}\sin^{2}\alpha &1&\cos^{2}\alpha \\ \sin^{2}\beta &1&\cos^{2}\beta \\\sin^{2}\gamma &1&\cos^{2}\gamma \end{vmatrix}$.
+\end{enumerate*}
+
+\item Решите уравнение $\begin{vmatrix}1  &x  &x  \\x  &1  &x  \\x  &x  &-2  \end{vmatrix}=0$.
+\item Решить СЛУ:\\
+\begin{enumerate*}
+	\item 
+	$\left\lbrace\begin{aligned}
+	2x-y-z &= 4,\\ 
+	3x+4y-2z &= 11,\\
+	3x-2y+4z &=11;
+      \end{aligned}\right.$
+	\item 
+ $\left\lbrace\begin{aligned}2x-3y+z-2 &=0,\\x+5y-4z+5 &=0,\\4x+y-3z+4
+	&=0; \end{aligned}\right.$ 
+	\item 
+	$\left\lbrace\begin{aligned}
+    -x_{1}+x_{2}+2x_{3} &= -5,\\ 
+    6x_{1}-2x_{2}+3x_{3} &= -7,\\
+    x_{1}+8x_{2}+5x_{3} &=  2;\\
+  \end{aligned}\right.$
+  
+%	\item 
+%	$\left\lbrace\begin{aligned}
+%    2x_{1}+2x_{2}-x_{3}+x_{4} &= 4,\\
+%    4x_{1}+3x_{2}-x_{3}+2x_{4} &= 6,\\
+%    8x_{1}+5x_{2}-3x_{3}+4x_{4} &= 12,\\
+%    3x_{1}+3x_{2}-2x_{3}+2x_{4} &= 6.
+%  \end{aligned}\right.$
+\end{enumerate*}
+\item 
+	На предприятии имеется четыре технологических способа изготовления изделий~$A$ и~$B$ из некоторого сырья. В таблице указано количество изделий, которое может быть произведено из единицы сырья каждым из технологических способов:
+
+{\centering
+\begin{tabularx}{12cm}{c|CCCC}
+\hline
+ & \multicolumn{4}{c}{Выход из единицы сырья}\\
+Изделие  & I & II & III & IV\\
+\hline
+$A$ & 2 & 1 & 7 & 4\\
+$B$ & 6& 12& 2 & 3\\
+\hline
+\end{tabularx}
+\par}
+
+Найти количество сырья, которое следует переработать по каждой технологии, чтобы произвести 574~изделия~$A$ и~328~изделий~$B$ из 94\;ед. сырья.
+\end{enumerate}
+\end{document}
+
+1) $\begin{pmatrix} -1 & 0 & -20\\ -19 & -2 & 45\end{pmatrix}$,
+$\begin{pmatrix}13 & 12\\ 20 & -27\end{pmatrix}$
+
+2a) $\begin{pmatrix}15 & 20\\ 20 & 35\end{pmatrix}$,
+2б) $\begin{pmatrix}5 & 15 & 25 & 35\end{pmatrix}^T$.
+
+4)$\begin{pmatrix}15 & -9\\ -15 & 24\end{pmatrix}$.
+
+5)$\begin{pmatrix}d-c & \frac{2}{3}c\\ c & d\end{pmatrix}$, 
+  $c,d\in \mathbb{R}$.
+\end{document}

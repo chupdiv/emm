@@ -1,0 +1,132 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[a4paper,border shrink=0mm,landscape]
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx,multirow,hhline}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=10mm,left=20mm]{geometry}
+\usepackage{paralist}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\newlist{denumerate}{enumerate}{1}
+\setlist[enumerate,1]{itemsep=5pt,label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\textbf{(\asbuk*)}, ref=\arabic*} %списки со скобками
+\setlist[denumerate,1]{noitemsep,label={Д.\,\arabic*.}, ref=\arabic*} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+
+\newcommand{\bitem}{\textbf{\item}}
+\begin{document}
+{\centering 
+{\centering {\scriptsize Практическое занятие \par}
+\bfseries Статистическое оценивание параметров случайной величины \par}
+
+\bigskip
+
+{
+  % \small
+\textbf{Доверительный интервалы по большим выборкам ($n\geqslant 20$)}
+
+\hrule
+\begin{tabular}{lcc}
+    % \hline
+    Характеристика         & Генеральная средняя  & Генеральная доля \\
+    \hline
+    Интервал &$|\bar{x} - \bar{x}_\text{в}| \leqslant \Delta$ & $|p - \omega_\text{в}| \leqslant \Delta$\\
+    Точность & $ \Delta = t\sigma_{\bar{x}}$ & $ \Delta = t\sigma_\omega$ \\
+                          & $\gamma = 2\Phi(t)$ & $\gamma = 2\Phi(t)$ \\
+    Повторная выборка& $\sigma_{\bar{x}} \approx \sqrt{\frac{s^2}{n}}$ & $\sigma_\omega  \approx \sqrt{\frac{\omega(1-\omega)}{n}}$\\ 
+    Бесповторная  выборка& $\sigma_{\bar{x}} \approx \sqrt{\frac{s^2}{n}\left(1-\frac{n}{N}\right)}$& $\sigma_w  \approx \sqrt{\frac{\omega(1-\omega)}{n}\left(1-\frac{n}{N}\right)}$\\
+    \hline
+    Параметр~$t$ & \multicolumn{2}{c}{$\gamma = 2\Phi(t)$} \\
+    Объем повторной выборки & $n=\frac{t^2\sigma^2}{\Delta^2}$ & $n=\frac{t^2pq}{\Delta^2}$\\ 
+    Объем бесповторной  выборки & \multicolumn{2}{c}{$n'=\frac{nN}{n+N}$}\\ 
+    % \hline
+\end{tabular}
+
+\hrule
+
+\textbf{Доверительный интервал для генеральной средней по малой выборке }($n<20$)
+
+ $|\bar{x}-\bar{x}_\text{в}|\leqslant \Delta_\text{мв},\qquad  \Delta_\text{мв}=\frac{t_{\gamma ,n-1}s}{\sqrt{n-1}}.$
+
+ \hrule
+ \textbf{Доверительный интервал для генеральной дисперсии }
+ 
+ $\frac{{ns}^2}{\chi_{\frac{1-\gamma}{2},n-1}^2}<\sigma ^2<\frac{{ns}^2}{\chi_{\frac{1+\gamma}{2},n-1}^2}.
+ $
+\par}
+
+\hrule
+\begin{enumerate}
+    \item Для исследования доходов населения города, составляющего 20 тыс. человек, по схеме собственно-случайной бесповторной выборки было отобрано 1000 жителей. Получено следующее распределение жителей по месячному доходу (тыс. руб.):
+    
+    {\centering
+    \begin{tabular}{c|cccccc}
+        $x_i$ & Менее 10 & 10-20 & 20-30 & 30-40 & 40-50 & Свыше 50 \\
+        \hline
+        $n_i$ &  58 & 96 & 239 & 328 & 147 & 132\\
+    \end{tabular}
+    \par}
+
+    Требуется:
+    \begin{enumerate}
+        \item найти несмещенную и состоятельную оценку доли жителей города с месячным доходом не менее 30 тыс. руб.; 
+        \item найти несмещенную и состоятельную оценку среднего месячного дохода; 
+        \item найти несмещенную и состоятельную оценку дисперсии месячного дохода; 
+        \item найти вероятность того, что средний месячный доход жителя города отличается от среднего дохода его в выборке не более чем на 9 тыс. руб. (по абсолютной величине); 
+        \item определить границы, в которых с надежностью 0,99 заключен средний месячный доход жителей города; 
+        \item каким должен быть объем выборки, чтобы те же границы гарантировать с надежностью 0,9973?
+    \end{enumerate}
+    \item Произведено 12 измерений одним прибором (без систематической ошибки) некоторой величины, имеющей нормальное распределение,
+  причем дисперсия случайных ошибок измерений оказалась равной 0,36. Найти
+  границы, в которых с надежностью 0,95 заключено среднее квадратическое
+  отклонение случайных ошибок измерений, характеризующих точность прибора.
+    \item[] \textbf{Домашнее задание}
+    \item Разобрать по учебнику Н.Ш. Кремера примеры 9.10, 9.11, 9.12, 9.13, 9.15, 9.17.
+    % \item Из партии, содержащей 2000 деталей, для проверки собственно-случайной бесповторной выборки было отобрано 200 деталей, среди которых оказалось 184 стандартных. Найти: 
+    % \begin{enumerate}
+    %     \item вероятность того, что доля нестандартных деталей во всей партии отличается от полученной доли в выборке не более чем на 0,02 (по абсолютной величине); 
+    %     \item  границы, в которых с надежностью 0,95 заключена доля нестандартных деталей во всей партии;
+    %     \item число деталей, которые надо отобрать в выборку, чтобы с вероятностью 0,95 доля нестандартных деталей в выборке отличалась от генеральной доли не более, чем на 0,04 (по абсолютной величине);    
+    % \end{enumerate}
+    % \item[] \textbf{Домашнее задание}
+    % \item Разобрать по учебнику Н.Ш. Кремера примеры 9.10, 9.11, 9.12, 9.13, 9.15, 9.17.
+     \item Упражнения 2,3 из пособия А.В. Ряттель Основы  кономико-математического моделирования с. 49--50
+\end{enumerate}
+\newpage
+\end{document}
