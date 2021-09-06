@@ -118,6 +118,298 @@
 	\tableofcontents
 \end{frame}
 
+\section{Сетевая модель}
+\subsection{Основные понятия}
+
+\begin{frame}{Сетевая модель}
+	\alert{Сетевая модель} --- изображение плана выполнения комплекса работ в виде связного орграфа, отражающего последовательность и зависимость выполняемых операций.
+
+
+	\structure{Область применения:}
+	\begin{itemize}
+	\item 
+		Формирование календарного плана реализации комплекса работ.
+	\item 
+		Принятие эффективных решений в процессе выполнения этого плана.
+	\end{itemize}
+
+	\structure{Достоинства:}
+	\begin{itemize}
+	\item 
+		Наглядность.
+	\item 
+		Инструмент для разделения полномочий и ответственности за выполнение работ.
+	\item 
+		\alert{Можно и нужно  применять для организации собственной деятельности уже сейчас!}
+	\end{itemize}
+
+%	\structure{Суть метода:}
+%	Группа экспертов дает свою оценку всем направлениям и вариантам решения проблемы, выделяя наиболее приоритетный путь (вариант). Показывает «пробелы», которым не уделили внимания. 
+\end{frame}
+
+\begin{frame}{Элементы сетевой модели}
+~
+{\centering
+\begin{tikzpicture}[>=latex,]
+\node[place] (P0) {0};
+\node[place] (P1) [above right=of P0] {1};
+\node[place] (P2) [below right=of P0] {2};
+\node[place] (P3) [right=of P1] {3};
+\node[place] (P4) [right=of P2] {4};
+\node[place] (P5) [below right=of P3] {5};
+\draw [->] (P0) -- node[above,sloped]{5} (P1);
+\draw [->] (P0) -- node[above,sloped]{2} (P2);
+\draw [dashed,->] (P1) -- (P2);
+\draw [->] (P1) -- node[above,sloped]{3}  (P3);
+\draw [->] (P2) -- node[above,sloped]{6}  (P3);
+\draw [->] (P2) -- node[above,sloped]{6} (P4);
+\draw [->] (P3) -- node[above,sloped]{4} (P5);
+\draw [->] (P4) -- node[above,sloped]{5} (P5);
+\end{tikzpicture}
+\par}
+
+\alert{События}~--- узлы орграфа 
+	\begin{itemize}
+	\item 0 --- исходное событие 
+	\item 5 --- завершающее событие 
+	\end{itemize}
+
+\alert{Работы}~--- дуги орграфа. Вес дуги --- продолжительность работы.
+	\begin{itemize}
+	\item (0,1)~--- работа, продолжительностью 5~единиц.
+	\item (1,2) --- фиктивная работа, продолжительность 0~единиц.
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}{Элементы сетевой модели. Работы}
+
+\begin{block}{Определение}
+	\alert{Работа}~--- совокупность приемов и действий, необходимых для выполнения конкретной задачи или достижения определенной цели. 
+\end{block}
+	\structure{Виды работ:}
+	\begin{itemize}
+	\item 
+		\alert{Работа-действие}~--- процесс, требующий затрат времени и ресурсов. 
+
+	\item 
+		\alert{Работа-ожидание}~--- процесс, требующий затрат времени, но не требующий ресурсных затрат. 
+
+	\item 
+		\alert{Зависимость (фиктивная работа)}~---  не требует ни затрат времени ни затрат ресурсов.
+		Упорядочивает связываемые ей состояния. 
+		
+
+	\end{itemize}
+
+	\medskip
+%	\structure{Изображение на графе:}
+	
+	\alert{Работы} изображаются дугами орграфа.
+	\begin{itemize}
+	\item 
+		Работа-действие и работа-ожидание~--- сплошная линия;
+	\item 
+		Зависимость~---пунктирная линия.
+	\end{itemize}
+
+\end{frame}
+
+\subsection{Построение сетевой модели}
+\begin{frame}{Правила построения  сетевой модели}
+	\begin{itemize}
+	\item
+		В сетевом графике не должно быть «тупиковых» событий, то есть событий, из которых не выходит ни одна работа, за исключением завершающего события.
+	\item
+		В сетевом графике не должно быть «хвостовых» событий, то есть событий, которым не предшествует хотя бы одна работа, за исключением исходного.
+	\item
+		В нем не должно быть циклов.
+	\item
+		Любые два события должны быть непосредственно связаны не более чем одной работой.
+	\item
+		В сети рекомендуется иметь одно исходное и одно завершающее событие.
+	\item
+		Сетевой график должен быть упорядочен. То есть события и работы должны располагаться так, чтобы для любой работы предшествующее ей событие было расположено левее и имело меньший номер по сравнению с завершающим эту работу событием.		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Упорядочение событий}
+
+Каждому событию~$I$ сопоставляется \alert{ранг}~--- максимальное число дуг пути от исходного события к событию $I$.	
+
+{\centering
+\begin{tikzpicture}[>=latex]
+	\draw[lightgray] (-1,1)-- +(10,0);
+	\foreach \x in {-1,1,...,9}
+		\draw[lightgray] (\x,2)-- +(0,-5);
+	\foreach \x in {0,1,...,4}
+		\draw (2*\x,1.5) node {\x};
+
+\node[place] (P0) at (0,-1) {0};
+\node[place] (P1) at (2,0) {1};
+\node[place] (P2) at (4,-2) {2};
+\node[place] (P3) at (6,0) {3};
+\node[place] (P4) at (6,-2) {4};
+\node[place] (P5) at (8,-1) {5};
+\draw [->] (P0) -- node[above,sloped]{5} (P1);
+\draw [->] (P0) -- node[above,sloped]{2} (P2);
+\draw [dashed,->] (P1) -- (P2);
+\draw [->] (P1) -- node[above,sloped]{3}  (P3);
+\draw [->] (P2) -- node[above,sloped]{6}  (P3);
+\draw [->] (P2) -- node[above,sloped]{6} (P4);
+\draw [->] (P3) -- node[above,sloped]{4} (P5);
+\draw [->] (P4) -- node[above,sloped]{5} (P5);
+\end{tikzpicture}
+\par}
+
+	Нумерация событий выполняется следующим образом:
+	\begin{itemize}
+	\item 
+		большему рангу соответствует больший номер события;
+	\item 
+		события, с одинаковым рангом, нумеруются произвольно.
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Параметры событий}
+
+
+\begin{frame}{Временн\'{ы}е параметры событий}
+	\begin{itemize}
+	\item[$t_\text{р}(i)$]~--- 
+		ранний (ожидаемый) срок свершения $i$-го события: 
+		$$\alert{t_\text{р}(i) = \max\limits_{j}\big(t_\text{р}(j)+t(j,i)\big)}$$
+
+	\item[$t_\text{п}(i)$]~--- 
+		поздний (предельный) срок: 
+		$$\alert{t_\text{п}(i) = \min\limits_{j}\big(t_\text{п}(j)-t(i,j)\big)}$$
+ 	
+	\item[$R(i)$]~--- 			
+		резерв времени  i-го события:
+		$$\alert{R(i)=t_\text{п}(i) - t_\text{р}(i)}$$
+	\end{itemize}
+
+	\structure{Изображение события:}\quad
+\begin{tikzpicture}[baseline]
+	\node[minimum height=2cm,draw,circle,bigadd={$i$}{$t_\text{р}(i)$}{$R(i)$}{$t_\text{п}(i)$}] (P0) at (0,0) {};
+\end{tikzpicture}
+\end{frame}
+%	\medskip
+%	\structure{Частные случаи:}
+%	\begin{itemize}
+%	\item ранний и поздний сроки свершения исходного события~--- 0
+%	
+%	\item поздний срок свершения завершающего события~--- продолжительность  критического пути.
+%
+%%	\item[$t_\text{п}(i)$]~--- 
+%%		поздний (предельный) срок: 
+%%		$t_\text{п}(i) = \min\limits_{i,j}(t_\text{п}(j)-t(i,j))$.
+%% 	
+%%	\item[$R(i)$]~--- 			
+%%		резерв времени  i-го события:
+%%		$R(i)=t_\text{п}(i) - t_\text{р}(i)$
+%	\end{itemize}
+
+
+\begin{frame}{Вычисление временных параметров событий}
+
+
+Ранний срок свершения событий вычисляется \alert{слева направо}:
+{\centering
+\begin{tikzpicture}[>=latex]
+	\node[draw,circle,add={0}{0}{0}{0}] (P0) at (0,-1) {};
+	\node[draw,circle,add={1}{5}{}{}] (P1) at (2,0) {};
+	\node[draw,circle,add={2}{5}{}{}] (P2) at (4,-2) {};
+	\node[draw,circle,add={3}{11}{}{}] (P3) at (6,0) {};
+	\node[draw,circle,add={4}{11}{}{}] (P4) at (6,-2) {};
+	\node[draw,circle,add={5}{16}{}{}] (P5) at (8,-1) {};
+	\draw [->,red,thick] (P0) -- node[above,sloped]{5} (P1);
+	\draw [->] (P0) -- node[above,sloped]{2} (P2);
+	\draw [dashed,->,red,thick] (P1) --node[above,sloped]{0} (P2);
+	\draw [->] (P1) -- node[above,sloped]{3}  (P3);
+	\draw [->,red,thick] (P2) -- node[above,sloped]{6}  (P3);
+	\draw [->,red,thick] (P2) -- node[above,sloped]{6} (P4);
+	\draw [->] (P3) -- node[above,sloped]{4} (P5);
+	\draw [->,red,thick] (P4) -- node[above,sloped]{5} (P5);
+\end{tikzpicture}
+
+\vspace{1cm}
+Поздний срок свершения событий вычисляется \alert{справа налево}:
+\begin{tikzpicture}[>=latex]
+	\node[draw,circle,add={0}{0}{0}{0}] (P0) at (0,-1) {};
+	\node[draw,circle,add={1}{5}{0}{5}] (P1) at (2,0) {};
+	\node[draw,circle,add={2}{5}{0}{5}] (P2) at (4,-2) {};
+	\node[draw,circle,add={3}{11}{1}{12}] (P3) at (6,0) {};
+	\node[draw,circle,add={4}{11}{0}{11}] (P4) at (6,-2) {};
+	\node[draw,circle,add={5}{16}{0}{16}] (P5) at (8,-1) {};
+	\draw [->,blue,thick] (P0) -- node[above,sloped]{5} (P1);
+	\draw [->] (P0) -- node[above,sloped]{2} (P2);
+	\draw [dashed,->,blue,thick] (P1) --node[above,sloped]{0} (P2);
+	\draw [->] (P1) -- node[above,sloped]{3}  (P3);
+	\draw [->] (P2) -- node[above,sloped]{6}  (P3);
+	\draw [->,blue,thick] (P2) -- node[above,sloped]{6} (P4);
+	\draw [->,blue,thick] (P3) -- node[above,sloped]{4} (P5);
+	\draw [->,blue,thick] (P4) -- node[above,sloped]{5} (P5);
+\end{tikzpicture}
+
+\par}
+
+\end{frame}
+
+
+\begin{frame}{Критический путь}
+	\begin{itemize}
+	\item
+		\alert{Полный путь}~--- это путь, соединяющий исходное событие с завершающим.
+	\item
+		\alert{Критический путь}~--- полный путь наибольшей длины.
+	\end{itemize}
+	
+\begin{tikzpicture}[>=latex]
+	\node[draw,circle,add={0}{0}{0}{0}] (P0) at (0,-1) {};
+	\node[draw,circle,add={1}{5}{0}{5}] (P1) at (2,0) {};
+	\node[draw,circle,add={2}{5}{0}{5}] (P2) at (4,-2) {};
+	\node[draw,circle,add={3}{11}{1}{12}] (P3) at (6,0) {};
+	\node[draw,circle,add={4}{11}{0}{11}] (P4) at (6,-2) {};
+	\node[draw,circle,add={5}{16}{0}{16}] (P5) at (8,-1) {};
+	\draw [->,red,thick] (P0) -- node[above,sloped]{5} (P1);
+	\draw [->] (P0) -- node[above,sloped]{2} (P2);
+	\draw [dashed,->,red,thick] (P1) --node[above,sloped]{} (P2);
+	\draw [->] (P1) -- node[above,sloped]{3}  (P3);
+	\draw [->] (P2) -- node[above,sloped]{6}  (P3);
+	\draw [->,red,thick] (P2) -- node[above,sloped]{6} (P4);
+	\draw [->] (P3) -- node[above,sloped]{4} (P5);
+	\draw [->,red,thick] (P4) -- node[above,sloped]{5} (P5);
+\end{tikzpicture}	
+\begin{block}{Теорема}
+\itshape Все вершины, лежащие на критическом пути имеют нулевой резерв времени.
+\end{block}
+\end{frame}
+
+%\begin{frame}{Временн\'{ы}е параметры работ}
+%	\begin{itemize}
+%	\item[$t_\text{рн}(i,j)$]~--- 
+%		ранний срок начала работы $i,j$: 
+%		$\alert{t_\text{рн}(i,j)=t_\text{р}(i)}$
+%
+%	\item[$t_\text{ро}(i,j)$]~--- 
+%		ранний срок окончания работы $i,j$: 
+%		$\alert{t_\text{ро}(i,j)=t_\text{р}(i)+t(i,j)}$
+%
+%	\item[$t_\text{пн}(i,j)$]~--- 
+%		поздний срок начала работы $i,j$: 
+%		$\alert{t_\text{пн}(i,j)=t_\text{п}(i)-t(i,j)}$
+%
+%	\item[$t_\text{по}(i,j)$]~--- 
+%		поздний срок окончания работы $i,j$: 
+%		$\alert{t_\text{по}(i,j)=t_\text{п}(о)}$
+%
+%	\item[$R_\text{п}(i,j)$]~--- 	полный резерв времени  работы $(i,j)$:		
+%		$$\alert{R_\text{п}(i,j)= t_\text{п}(j) - t_\text{р}(i)-t(i,j)}$$
+%	\end{itemize}
+%\end{frame}
 
 \section{Исследование сетевой модели}
 \subsection{Временные параметры}
@@ -1569,57 +1861,63 @@ $$
 \end{tikzpicture}	
 \end{frame}
 
-\subsection{Неопределенность времени выполнения работ}
+%\subsection{Неопределенность времени выполнения работ}
 
 
  
-\begin{frame}{Модели с неопределенным сроком работ}
-На практике сроки выполнения работ сложно определить точно.
+%\begin{frame}{Модели с неопределенным сроком работ}
+%На практике сроки выполнения работ сложно определить точно.
+%
+%Для построения сетевой модели используют экспертные оценки продолжительности работы:
+%\begin{description}
+%\item[$t_{\min}(i,j)$]~--- минимальная продолжительность работы;
+%\item[$t_{\max}(i,j)$]~--- максимальная продолжительность работы;
+%\end{description}
+%Тогда ожидаемая продолжительность работы определяется по формуле
+%$$
+%t(i,j)= \frac{2t_{\min}(i,j)+3t_{\max}(i,j)}{5}
+%$$
+%
+%А среднее  квадратичное отклонение
+%$$
+%\sigma(i,j)= \frac{t_{\max}(i,j)-t_{\min}(i,j)}{6}
+%$$
+%
+%Далее можно строить сетевую модель.
+%\end{frame}
 
-Для построения сетевой модели используют экспертные оценки продолжительности работы:
-\begin{description}
-\item[$t_{\min}(i,j)$]~--- минимальная продолжительность работы;
-\item[$t_{\max}(i,j)$]~--- максимальная продолжительность работы;
-\end{description}
-Тогда ожидаемая продолжительность работы определяется по формуле
-$$
-t(i,j)= \frac{2t_{\min}(i,j)+3t_{\max}(i,j)}{5}
-$$
-
-А среднее  квадратичное отклонение
-$$
-\sigma(i,j)= \frac{t_{\max}(i,j)-t_{\min}(i,j)}{6}
-$$
-
-Далее можно строить сетевую модель.
-\end{frame}
-
-\begin{frame}{Модели с неопределенным сроком работ}
-Опираясь на свойства  случайных величин
-и используя методы статистической проверки гипотез можно оценивать: 
-\begin{itemize}
-\item 
-	вероятности наступления событий в пределах их ранних и поздних сроков,
-\item 
-	вероятность завершения проекта к заранее установленной дате
-\item 
-	срок к которому будет завершен проект с заданной надежностью.
-\end{itemize}
-
-
-\begin{exampleblock}{}
-Эти задачи мы научимся решать после нового года.
-\end{exampleblock}
-\end{frame}
-
-
+%\begin{frame}{Модели с неопределенным сроком работ}
+%Опираясь на свойства  случайных величин
+%и используя методы статистической проверки гипотез можно оценивать: 
+%\begin{itemize}
+%\item 
+%	вероятности наступления событий в пределах их ранних и поздних сроков,
+%\item 
+%	вероятность завершения проекта к заранее установленной дате
+%\item 
+%	срок к которому будет завершен проект с заданной надежностью.
+%\end{itemize}
+%
+%
+%\begin{exampleblock}{}
+%Эти задачи мы научимся решать после Нового года.
+%\end{exampleblock}
+%\end{frame}
 
 
 
+
+
+\section{Заключение}
 \subsection{Резюме лекции и домашнее задание}
 \begin{frame}{Резюме}
 	После проработки лекции вы должны уметь:
 	\begin{itemize}
+	\item 
+		строить сетевой график выполнения этих работ;
+	\item 
+		находить критические пути и их продолжительность;
+	
 	\item 
 		рассчитывать временные характеристики сетевого графика
 	\item 
@@ -1632,6 +1930,7 @@ $$
 \end{frame}
 
 
+\subsection{Домашнее задание}
 \begin{frame}{Задание}
 Для завершения лекции вам необходимо подготовить конспект, в который должны войти:
 	\begin{enumerate}
@@ -1645,17 +1944,16 @@ $$
 
 
 \end{frame}
+
+\subsection{Источники информации}
 \begin{frame}{Источники информации}
 \begin{itemize}
 \item 
-	Исследование и оптимизация моделей:  {\color{blue}\href{https://cloud.mail.ru/public/4SN3/2MJYgEz95}{Кремер  Н.\,Ш. Исследование операций в экономике}} параграф 14.8, с. 320--330.
-\item 
-	Все материалы по курсу здесь:
-{\color{blue}\url{https://cloud.mail.ru/public/48BX/47oESuaQQ}}
+	Исследование и оптимизация моделей:  Кремер  Н.\,Ш. Исследование операций в экономике параграф 14.8, с. 320--330.
 
 \item 
-	Каренов  К.\,М. {\color{blue}\href{https://articlekz.com/article/5878}{Теоретические и методические основы оптимизации сетевых моделей по времени}} // Вестник КарГУ, 2012. URL: 
-	{\color{blue}\url{https://articlekz.com/article/5878}}
+	Каренов  К.\,М. Теоретические и методические основы оптимизации сетевых моделей по времени // Вестник КарГУ, 2012. URL: 
+	
 \end{itemize}
 
 \end{frame}
