@@ -1,0 +1,199 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,colorlinks,urlcolor=blue, citecolor=magenta]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=9mm]{geometry}
+\usepackage[inline]{enumitem}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\begin{document}
+{\centering \small Практическое занятие \textnumero~2 \par
+\bfseries \large Сетевые модели \par}
+
+\begin{enumerate}
+\item Упорядочить сетевой граф:
+
+{\centering
+\begin{tikzpicture}[y=7.5mm, x=8mm,above,sloped]
+\node[draw,circle] (0) at (0,0) {0};
+\node[draw,circle] (1) at (2,2) {1};
+\node[draw,circle] (2) at (2,0) {2};
+\node[draw,circle] (3) at (2,-2) {3};
+\node[draw,circle] (4) at (5,2) {4};
+\node[draw,circle] (5) at (5,0) {5};
+\node[draw,circle] (6) at (5,-2) {6};
+\node[draw,circle] (7) at (7,-1) {7};
+\node[draw,circle] (8) at (7, 1) {8};
+\node[draw,circle] (10) at (7,-3) {10};
+\node[draw,circle] (9) at (9,0) {9};
+\node[draw,circle] (11) at (11,0) {11};
+\draw[-stealth] (0) -- (1);
+\draw[-stealth] (0) -- (3);
+\draw[-stealth] (1) -- (2);
+\draw[-stealth] (1) -- (4);
+\draw[-stealth] (1) -- (5);
+\draw[-stealth] (2) -- (3);
+\draw[-stealth] (2) -- (5);
+\draw[-stealth] (2) -- (7);
+\draw[-stealth] (3) -- (7);
+\draw[-stealth] (3) -- (6);
+\draw[-stealth] (3) -- (10);
+\draw[-stealth] (4) -- (8);
+\draw[-stealth] (5) -- (7);
+\draw[-stealth] (5) -- (8);
+\draw[-stealth] (6) -- (10);
+\draw[-stealth] (7) -- (6);
+\draw[-stealth] (7) -- (8);
+\draw[-stealth] (7) -- (9);
+\draw[-stealth] (7) -- (10);
+\draw[-stealth] (8) -- (9);
+\draw[-stealth] (9) -- (11);
+\draw[-stealth] (10) -- (9);
+\draw[-stealth] (10) -- (11);
+
+\end{tikzpicture}
+\par}
+
+\item Для сетевой модели определить следующие характеристики:
+
+{\centering
+\begin{tikzpicture}[y=9mm, x=12mm,above,sloped]
+\node[draw,circle] (1) at (0,0) {1};
+\node[draw,circle] (2) at (2,-2) {2};
+\node[draw,circle] (3) at (2, 2) {3};
+\node[draw,circle] (4) at (4, 2) {4};
+\node[draw,circle] (5) at (4,-2) {5};
+\node[draw,circle] (6) at (4, 0) {6};
+\node[draw,circle] (7) at (6, 2) {7};
+\node[draw,circle] (8) at (6, -2) {8};
+\node[draw,circle] (9) at (8, 0) {9};
+\draw[-stealth] (1) -- node{11} (2);
+\draw[-stealth] (1) -- node{15} (3);
+\draw[-stealth] (1) -- node{9} (4);
+\draw[-stealth] (1) -- node{13} (6);
+\draw[-stealth] (2) -- node{12} (5);
+\draw[-stealth] (2) -- node{12} (6);
+\draw[-stealth] (3) -- node{11} (4);
+\draw[-stealth] (3) -- node{5} (6);
+\draw[-stealth] (4) -- node{14} (7);
+\draw[-stealth] (5) -- node{10} (8);
+\draw[-stealth] (6) -- node{14} (8);
+\draw[-stealth] (6) -- node{13} (9);
+\draw[-stealth] (7) -- node{11} (9);
+\draw[-stealth] (8) -- node{10} (9);
+\end{tikzpicture}
+\par}
+\begin{enumerate}
+\item ранние и поздние сроки совершения событий;
+\item резервы времени событий;
+\item критический путь;
+\item для некритических работ найти полные и свободные резервы времени. 
+\end{enumerate}
+На основе проведенных расчетов установить, как повлияет на срок выполнения работ и полный резерв времени работы (6,8) увеличение продолжительности работы (6,9), например, на 4 ед
+\item 
+
+Данные по основным операциям проекта представлены в следующей таблице:
+
+{\centering
+\begin{tabular}{ccc}
+\hline
+Работа & Необходимо выполнение & Длительность, недели\\
+\hline
+$A$ & ---	& 4 \\
+$B$ & ---	& 6 \\
+$C$ & $A,B$ & 7 \\
+$D$ & $B$	& 3 \\
+$E$ & $C$	& 4 \\
+$F$ & $D$	& 5 \\
+$G$ & $E,F$ & 3 \\
+\hline
+\end{tabular}
+\par}
+
+Постройте сетевую модель проекта, определите критические пути модели и проанализируйте, как влияет на ход выполнения проекта задержка работы $D$ на 4 недели.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Для улучшения финансового состояния фирме необходимо увеличить спрос на выпускаемый
+%цемент марки М400 и расширить потребительский рынок. Фирма считает целесообразным размещать
+%цемент в специализированной таре. Для переоснащения цеха необходимо установить оборудование по
+%производству специализированной тары. Предполагается выполнить следующее:
+%
+%
+%%\begin{tabular}{|cp{8cm}|cc|cc|}
+%%%\hline
+%%%	№ п.\,п. & Yfbvtyjdf
+%%\hline
+%%	1 & Подготовка и выпуск технического задания на переоборудование цеха 
+%%	  & 20 & 20 & 18 & 26 \\
+%%	2 & Разработка мероприятий по технике безопасности						
+%%	  & 25 & 30 & 20 & 37 \\
+%%	3 & Подбор кадров
+%%	  & 10 & 5 & 9 & 7 \\
+%%	4 & Заказ и поставка необходимого оборудования
+%%	  & 30 & 60 & 23 & 64 \\ 
+%%	5 & Заказ и поставка электрооборудования
+%%	  & 40 & 65 & 32 & 78 \\
+%%	6 & Установка оборудования
+%%	  & 50 & 90 & 43 & 100 \\
+%%	7 & Установка электрооборудования
+%%	  & 45 & 80 & 41 & 85 \\
+%%	8 & Обучение персонала
+%%	  & 15 & 5 & 9 & 10 \\
+%%	9 & Испытание и сдачу в эксплуатацию линии	
+%%	  & 25 & 50 & 21 & 57 \\
+%%\hline
+%%\end{tabular}
+%%Ожидается, что производительность вводимой линии по производству тары составит 1000
+%%мешков в день при односменном режиме работы. 
+%%Стоимость 1 мешка~--- 25 р., 
+%%выручка от реализации тары в смену составит 25 тыс. р., 
+%%из которых чистая прибыль фирмы равна 50 тыс. р. 
+%%Деньги на покупку оборудования и переоснащение цеха в размере 5 500 тыс. р. взяты в банке под 30% годовых из расчета
+%%5000 тыс. р. на оборудование и 500 тыс. р. на его установку.
+%%Затраты на проведение работ и их продолжительность в нормальном и максимальном режимах
+%%указаны в табл. 30.8
+
+
+\item \textbf{На дом:} задания 2,3 практического занятия 2 из пособия Ряттель А.\,В. Основы экономико-математического
+моделирования стр. 13. Ищите здесь: \url{https://cloud.mail.ru/public/3soD/y91HFQd3H}
+
+\end{enumerate}
+\end{document}
