@@ -1,0 +1,149 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,colorlinks,urlcolor=blue, citecolor=magenta]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=9mm]{geometry}
+\usepackage[inline]{enumitem}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{tabularx}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\begin{document}
+{\centering \small Практическое занятие \textnumero~3 \par
+\bfseries \large Сетевые модели \par}
+
+\begin{enumerate}
+
+\item 
+По имеющимся данным требуется:
+
+{\centering
+\begin{tabular}{c>{\centering}p{4cm}>{\centering}p{4cm}>{\centering}p{4cm}}
+\hline
+Работа, & Длительность работы, дн. $t_{ij}$ & Минимальное время работы,$d_{ij}$ дн. & Коэффициент использования дополнительных средств, $k_{ij}$\tabularnewline
+\hline
+1,2 & 10 &  6 & 0,6  \tabularnewline
+1,3 &  8 &  5 & 0,1 \tabularnewline
+2,3 & 14 & 10 & 0,3 \tabularnewline
+2,4 &  6 &  2 & 0,8 \tabularnewline
+3,4 &  5 &  4 & 0,9 \tabularnewline
+3,5 & 12 &  7 & 0,5 \tabularnewline
+4,5 &  4 &  2 & 0,3 \tabularnewline
+\hline
+\end{tabular}
+\par}
+Ограничение на затраты: 210 ден.ед.
+
+\begin{enumerate}
+\item построить сетевой график
+\item выделить критический путь и найти его длину;
+\item определить резервы времени каждого события;
+\item определить резервы времени (полные, частные первого вида, свободные и независимые) всех работ и коэффициенты напряженности работ, не лежащих на критическом пути;
+\item выполнить оптимизацию сетевого графика по времени.
+\end{enumerate}
+\item 
+Для проведения некоторых работ предприятие арендует производственное помещение. Стоимость аренды 10 ден. ед в день. В таблице приведён расчет продолжительностей выполняемых работ. Оптимизируйте работы по времени выполнения.
+
+{\centering
+\begin{tabular}{c>{\centering}p{3cm}>{\centering}p{3cm}>{\centering}p{3cm}>{\centering}p{3cm}}
+\hline
+& \multicolumn{2}{>{\bfseries}c}{Нормальный режим работ}& \multicolumn{2}{>{\bfseries}c}{Максимальный режим работ}\tabularnewline
+Операция & Длительность, дн. & Стоимость, ден. ед. &Длительность, дн. & Стоимость, ден. ед.\tabularnewline
+\hline
+1,2 & 4	&  80 & 2 & 150 \tabularnewline
+1,3 & 2	&  50 & 1 &  70 \tabularnewline
+1,4 & 3	&  60 & 2 &  80 \tabularnewline
+2,4 & 2	&  60 & 1 &  70 \tabularnewline
+2,6 & 6	& 100 & 3 & 160 \tabularnewline
+3,4 & 2	&  40 & 1 &  60 \tabularnewline
+3,5 & 3	&  70 & 2 &  90 \tabularnewline
+4,6 & 4	&  90 & 2 & 170 \tabularnewline
+5,6 & 4	&  80 & 2 & 160 \tabularnewline
+\hline
+\end{tabular}
+\par}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Для улучшения финансового состояния фирме необходимо увеличить спрос на выпускаемый
+%цемент марки М400 и расширить потребительский рынок. Фирма считает целесообразным размещать
+%цемент в специализированной таре. Для переоснащения цеха необходимо установить оборудование по
+%производству специализированной тары. Предполагается выполнить следующее:
+%
+%
+%%\begin{tabular}{|cp{8cm}|cc|cc|}
+%%%\hline
+%%%	№ п.\,п. & Yfbvtyjdf
+%%\hline
+%%	1 & Подготовка и выпуск технического задания на переоборудование цеха 
+%%	  & 20 & 20 & 18 & 26 \\
+%%	2 & Разработка мероприятий по технике безопасности						
+%%	  & 25 & 30 & 20 & 37 \\
+%%	3 & Подбор кадров
+%%	  & 10 & 5 & 9 & 7 \\
+%%	4 & Заказ и поставка необходимого оборудования
+%%	  & 30 & 60 & 23 & 64 \\ 
+%%	5 & Заказ и поставка электрооборудования
+%%	  & 40 & 65 & 32 & 78 \\
+%%	6 & Установка оборудования
+%%	  & 50 & 90 & 43 & 100 \\
+%%	7 & Установка электрооборудования
+%%	  & 45 & 80 & 41 & 85 \\
+%%	8 & Обучение персонала
+%%	  & 15 & 5 & 9 & 10 \\
+%%	9 & Испытание и сдачу в эксплуатацию линии	
+%%	  & 25 & 50 & 21 & 57 \\
+%%\hline
+%%\end{tabular}
+%%Ожидается, что производительность вводимой линии по производству тары составит 1000
+%%мешков в день при односменном режиме работы. 
+%%Стоимость 1 мешка~--- 25 р., 
+%%выручка от реализации тары в смену составит 25 тыс. р., 
+%%из которых чистая прибыль фирмы равна 50 тыс. р. 
+%%Деньги на покупку оборудования и переоснащение цеха в размере 5 500 тыс. р. взяты в банке под 30% годовых из расчета
+%%5000 тыс. р. на оборудование и 500 тыс. р. на его установку.
+%%Затраты на проведение работ и их продолжительность в нормальном и максимальном режимах
+%%указаны в табл. 30.8
+
+\medskip
+\item \textbf{На дом:} См. файл \texttt{Пр3-Сети. Оптимизация. На дом.pdf}.  Ищите здесь: \url{https://cloud.mail.ru/public/3soD/y91HFQd3H}
+ 
+
+
+\end{enumerate}
+\end{document}
