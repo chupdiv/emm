@@ -1,3 +1,5 @@
+% !TEX TS-program = pdflatex
+
 \documentclass[unicode,11pt,notheorems]{beamer}
 
 \usepackage[T2A]{fontenc}
@@ -296,6 +298,7 @@
 	\node[minimum height=2cm,draw,circle,bigadd={$i$}{$t_\text{р}(i)$}{$R(i)$}{$t_\text{п}(i)$}] (P0) at (0,0) {};
 \end{tikzpicture}
 \end{frame}
+
 %	\medskip
 %	\structure{Частные случаи:}
 %	\begin{itemize}
@@ -388,28 +391,6 @@
 \end{block}
 \end{frame}
 
-%\begin{frame}{Временн\'{ы}е параметры работ}
-%	\begin{itemize}
-%	\item[$t_\text{рн}(i,j)$]~--- 
-%		ранний срок начала работы $i,j$: 
-%		$\alert{t_\text{рн}(i,j)=t_\text{р}(i)}$
-%
-%	\item[$t_\text{ро}(i,j)$]~--- 
-%		ранний срок окончания работы $i,j$: 
-%		$\alert{t_\text{ро}(i,j)=t_\text{р}(i)+t(i,j)}$
-%
-%	\item[$t_\text{пн}(i,j)$]~--- 
-%		поздний срок начала работы $i,j$: 
-%		$\alert{t_\text{пн}(i,j)=t_\text{п}(i)-t(i,j)}$
-%
-%	\item[$t_\text{по}(i,j)$]~--- 
-%		поздний срок окончания работы $i,j$: 
-%		$\alert{t_\text{по}(i,j)=t_\text{п}(о)}$
-%
-%	\item[$R_\text{п}(i,j)$]~--- 	полный резерв времени  работы $(i,j)$:		
-%		$$\alert{R_\text{п}(i,j)= t_\text{п}(j) - t_\text{р}(i)-t(i,j)}$$
-%	\end{itemize}
-%\end{frame}
 
 \section{Исследование сетевой модели}
 \subsection{Временные параметры}
@@ -525,7 +506,7 @@
 
 	\item[$t_\text{пн}(i,j)$]~--- 
 		поздний срок начала работы:  \hfill
-		$\alert{t_\text{пн}(i,j)=t_\text{п}(i)-t(i,j)}$
+		$\alert{t_\text{пн}(i,j)=t_\text{п}(j)-t(i,j)}$
 
 	\item[$t_\text{по}(i,j)$]~--- 
 		поздний срок окончания работы:  \hfill
@@ -607,6 +588,29 @@
 	\end{itemize}
 \end{frame}
 
+
+\begin{frame}{Резервы времени. Экономический смысл}
+	\begin{itemize}
+	\item \alert{Полный резерв времени $R_\text{п}(i,j)$}~--- количество времени, на которое может быть увеличена продолжительность работы при условии, что наибольший из путей, проходящих через эту работу, не превысит длины критического пути.
+%	$$
+%		\alert{R_\text{п}(i,j)= t_\text{п}(j) - t_\text{р}(i)-t(i,j)}
+%	$$
+	\item \alert{Частный резерв первого вида $R_\text{1}(i,j)$} характеризует возможность изменить позднее начало работы на более ранние сроки без изменения поздних сроков окончания предшествующих работ.
+%	$$
+%		\alert{R_\text{1}(i,j)= t_\text{п}(j) - t_\text{п}(i)-t(i,j)}
+%	$$
+	\item \alert{Свободный резерв времени	$R_\text{с}(i,j)$}~--- время, на которое можно увеличить продолжительность работы при условии своевременности ее начала и без сдвига раннего начала последующих работ.
+%	$$
+%		\alert{R_\text{с}(i,j)= t_\text{р}(j) - t_\text{р}(i)-t(i,j)}
+%	$$
+	\item \alert{Независимый резерв времени $R_\text{н}(i,j)$}~--- время, на которое может быть задержано выполнение работы без ущерба для времени начала последующих действий и времени окончания предшествующих действий. 
+%	$$
+%	\alert{R_\text{н}(i,j)= t_\text{р}(j) - t_\text{п}(i)-t(i,j)}
+%	$$
+	\end{itemize}
+\end{frame}
+
+\end{document}
 \begin{frame}{Резервы времени. Пример}{}
 \begin{tikzpicture}[>=latex]
 	\node[draw,circle,add={1}{0}{0}{0}] (P1) at (0,-1) {};
