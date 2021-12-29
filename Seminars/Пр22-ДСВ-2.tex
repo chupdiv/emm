@@ -1,0 +1,120 @@
+%encoding=utf8%
+\documentclass[a4paper,14pt]{extarticle}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[a4paper,border shrink=0mm,landscape]
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{tabularx,multirow,hhline}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=20mm]{geometry}
+\usepackage{paralist}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{dotenumerate}{enumerate}{10}
+\newlist{denumerate}{enumerate}{1}
+\setlist[enumerate,1]{itemsep=5pt,label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\textbf{(\asbuk*)}, ref=\arabic*} %списки со скобками
+\setlist[denumerate,1]{noitemsep,label={Д.\,\arabic*.}, ref=\arabic*} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+
+\sloppy
+\binoppenalty=10000
+\relpenalty=10000
+
+\usepackage{diagbox}
+
+\newcommand{\bitem}{\textbf{\item}}
+\begin{document}
+{\centering 
+{\centering {\scriptsize Практическое занятие \textnumero~22 \par}
+\bfseries Дискретные случайные величины --- 2\par}
+\begin{enumerate}
+\item 
+	Составить закон распределения ДСВ  $X+2Y$, найти ее математическое ожидание и дисперсию (двумя способами), если ДСВ $X$ и $Y$ заданы законами распределения:
+$$
+\begin{array}{c|ccc}
+	x_i & 0 & 1 & 3 \\
+	\hline
+	p_i & 0,3 & 0,6 & 0,1\\
+\end{array}
+\qquad
+\begin{array}{c|cc}
+	y_i & 0 & 2 \\
+	\hline
+	p_i & 0,2 & 0,8\\
+\end{array}
+$$
+
+%\item 
+%	Найти математическое ожидание случайной величины $Z=X+2Y$, если известны математические ожидания $M(X)=5$, $M(Y)=3$.
+
+\item 
+	Случайные величины $X$ и $Y$ независимы. Найти дисперсию случайной величины $Z=3X+2Y$, если известно, что $D(X)=5$, $D(Y)=6$.
+\item 
+	Вероятность того, что стрелок попадет в мишень при одном выстреле, равна 0,8. Стрелку выдаются патроны до тех пор, пока он не промахнется. Требуется: а) составить закон распределения ДСВ Х – числа патронов, выданных стрелку; б) найти моду $X$.
+	
+\item Задана дискретная двумерная случайная величина $(X,Y)$: 
+$$\begin{array}{c|ccc}
+			& \multicolumn{3}{c}{X}\\
+	Y  		& x_1=2 & x_2=4 & x_3=8 \\
+	\hline
+	y_1=4  	& 0,05 	& 0,15 	& 0,20\\
+	y_2=8 	& 0,15 	& 0,25 	& 0,20\\
+\end{array}
+$$
+Найти: 
+	а) безусловные законы распределения составляющих; 
+	б) условный закон распределения составляющей X при условии, что составляющая $Y$ приняла значение $y_2=8$; 
+	в) условный закон распределения Y при условии, что $X=x_2=4$.
+\item
+	Два бомбардировщика поочередно сбрасывают бомбы на цель до первого попадания. Вероятность попадания  в цель первым бомбардировщиком равна 0,6, вторым~--- 0,7. У каждого бомбардировщика имеется по 4 бомбы. Найти функцию распределения ДСВ $Х$~--- число сброшенных бомб.
+\item[] \textbf{Домашнее задание}
+\item
+	Даны две ДСВ: $X$~--- число появлений орла при двух бросках монеты, $Y$~--- число выпавших очков при бросании игральной кости. 
+	Составить их законы распределения. Найти $M(X-Y)$, $D(X-Y)$  и $M(XY)$, $D(XY)$.
+%\item 
+%	Два консервных завода поставляют продукцию в магазин в пропорции $2:3$. Доля продукции высшего качества на первом заводе составляет 90\%, а на втором~--- 80\%. 
+%	В магазине куплено 3 банки консервов. Найти функцию распределения СВ $X$~--- число банок с продукцией высшего качества.
+
+\item Задана дискретная двумерная случайная величина $(X,Y)$: 
+$$\begin{array}{c|ccc}
+			& \multicolumn{3}{c}{X}\\
+	Y  		& x_1=2 & x_2=3 & x_3=8 \\
+	\hline
+	y_1=2  	& 0,10 & 0,20 & 0,40\\
+	y_2=5 	& 0,15 & 0,05 & 0,10\\
+\end{array}
+$$
+Найти: 
+	а) безусловные законы распределения составляющих; 
+	б) условный закон распределения составляющей $X$ при условии, что составляющая $Y$ приняла значение $y_1=2$.	
+\end{enumerate}
+\end{document}

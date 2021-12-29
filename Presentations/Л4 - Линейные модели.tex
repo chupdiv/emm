@@ -134,9 +134,6 @@
 \end{frame}
 
 
-%\section{Экономические задачи, приводящие к понятию матриц}
-
-
 \section{Системы линейных уравнений}
 \begin{frame}{Системы линейных уравнений}{}
 	\alert{Системой $m$ линейных уравнений с $n$ неизвестными} называется система вида 
@@ -160,12 +157,24 @@
 	\end{itemize}
 \end{frame}
 \begin{frame}{Решение СЛУ}
-\alert{Решение системы}~--- совокупность $n$ чисел $c_1, c_2,\ldots, c_n$, таких что подстановка каждого $c_i$ вместо $x_i$ в систему  обращает все ее уравнения в тождества.
+\alert{Решение системы}~--- совокупность $n$ чисел $c_1, c_2,\ldots, c_n$, таких что подстановка каждого $c_i$ вместо $x_i$ в систему  обращает все ее уравнения в тождества:
+
+	$$
+	\begin{aligned}
+		a_{11}c_1+ a_{12}c_2+ \ldots+ a_{1n}c_n &= b_1\\
+		a_{21}c_1+ a_{22}c_2+ \ldots+ a_{2n}c_n &= b_1\\
+		&\cdots\\
+		a_{m1}c_1+ a_{m2}c_2+ \ldots+ a_{mn}c_n &= b_m\\
+	\end{aligned}
+	$$
+
+\bigskip
 
 \alert{Решить систему}~--- найти множество всех ее решений.
+\end{frame}
 
-\medskip
-\structure{Виды систем линейных уравнений:}
+\begin{frame}{Классификация СЛУ}
+
 	\begin{tikzpicture}[>=latex]
 		\node[rectangle,draw] (N0) at (0,1) {СЛУ};
 		\node[rectangle,draw] (NL) at (-3,-1) {Совместная};
@@ -179,6 +188,395 @@
 			(NL) edge node[sloped,above,vgured]{много} node[sloped,below,vgured]{решений} (MNK) 
 			;
 	\end{tikzpicture}
+\end{frame}
+
+
+
+\begin{frame}{Матричная форма СЛУ}{}
+\vspace{-5mm}
+	\begin{gather*}
+	\left\lbrace \begin{aligned}
+		a_{11}x_1+ a_{12}x_2+ \ldots+ a_{1n}x_n &= b_1\\
+		a_{21}x_1+ a_{22}x_2+ \ldots+ a_{2n}x_n &= b_1\\
+		&\cdots\\
+		a_{m1}x_1+ a_{m2}x_2+ \ldots+ a_{mn}x_n &= b_m\\
+	\end{aligned}
+	\right.\\
+\Updownarrow\\
+		\begin{pmatrix} 
+			a_{11} & a_{12} & \cdots & a_{1n}\\
+			a_{21} & a_{22} & \cdots & a_{2n}\\
+			\cdots &\cdots &\cdots &\cdots \\
+			a_{m1} & a_{m2} & \cdots & a_{mn}\\
+		\end{pmatrix}
+		\cdot
+		\begin{pmatrix} 
+			x_{1}\\
+			x_{2}\\
+			\cdots\\
+			x_{n}\\
+		\end{pmatrix}	
+		=
+		\begin{pmatrix} 
+			b_{1}\\
+			b_{2}\\
+			\cdots\\
+			b_{n}\\
+		\end{pmatrix}\\
+\Updownarrow\\
+		\alert{AX=B}
+\end{gather*}
+
+\vspace{-2mm}
+\begin{itemize}
+	\item $A$~--- матрица коэффициентов ($m\times n$);
+	\item 
+		$B$~--- столбец свободных членов ($m\times 1$);
+	\item 
+		$X$~--- столбец неизвестных ($n\times 1$).
+\end{itemize}
+\end{frame}
+
+\section{Методы решения СЛУ}
+\subsection{Матричный метод решения СЛУ}
+\begin{frame}{Матричный метод}
+\begin{block}{Теорема (Матричный метод решения СЛУ)}
+\itshape  Если в СЛУ число уравнений равно числу переменных и определитель матрицы коэффициентов 
+$$
+\Delta=\det(A)\neq 0,
+$$
+то рассматриваемая система имеет одно и только одно решение:
+	$$
+		X=A^{-1}B
+	$$
+\end{block}
+
+\end{frame}
+\begin{frame}[allowframebreaks]{Пример матричного решения СЛУ}
+	\begin{exampleblock}{Задача}
+		Решить СЛУ: 
+		$
+		\left\lbrace
+		\begin{aligned}
+			x_1+2x_2-x_3 &= 2,\\
+			2x_1-3x_2+2x_3 &= 2,\\
+			3x_1+x_2+x_3 &= 8,\\
+		\end{aligned}
+		\right.
+		$
+	\end{exampleblock}
+	\begin{itemize}
+	\item 
+		Представим СЛУ в матричном виде:
+		$$
+			\begin{pmatrix}
+				 1 & 2& -1\\
+				 2 & -3& 2\\
+				 3 & 1& 1\\
+			\end{pmatrix}
+			X = 
+			\begin{pmatrix}
+				 2\\
+				 2\\
+				 8\\
+			\end{pmatrix}
+		$$
+		Матрица коэффициентов квадратная.
+	\item 
+		 Найдем определитель матрицы коэффициентов:
+		$$
+			\det(A)= 
+			\begin{vmatrix}
+				 1 & 2& -1\\
+				 2 & -3& 2\\
+				 3 & 1& 1\\
+			\end{vmatrix}
+			 = -3+12-2-9-2-4=-8 \neq 0
+		$$
+	СЛУ имеет единственное решение
+	\item 
+		 Найдем обратную матрицу:	
+		$$
+			A^{-1}= \frac{1}{\det(A)}A^*= \frac{1}{-8}
+			\begin{pmatrix}
+				-5 & -3 & 1\\
+				4 & 4 & -4\\
+				11 & 5 & -7
+			\end{pmatrix}
+		$$
+
+	\framebreak
+	\item 
+		Найдем решение матричного уравнения:	
+		\begin{multline*}
+			X=A^{-1}B 
+			=\\
+			= -\frac{1}{8}
+			\begin{pmatrix}
+				-5 & -3 & 1\\
+				4 & 4 & -4\\
+				11 & 5 & -7
+			\end{pmatrix}
+			\begin{pmatrix}
+				2 \\
+				2 \\
+				8 
+			\end{pmatrix}
+			=
+			-\frac{1}{8}\begin{pmatrix}
+				-5\cdot 2-3\cdot 2 + 1\cdot 8\\
+				4\cdot 2 + 4\cdot 2  -4\cdot 8\\
+				11\cdot 2 + 5\cdot 2 -7\cdot 8
+			\end{pmatrix}
+			=\\
+			-\frac{1}{8}\begin{pmatrix}
+				-8\\
+				-16\\
+				-24
+			\end{pmatrix}
+			=
+			\begin{pmatrix}
+				1\\
+				2\\
+				3
+			\end{pmatrix}
+		\end{multline*}
+	\end{itemize}
+	\structure{Ответ:} \alert{$(x_1,x_2,x_3)= (1,2,3)$}
+\end{frame}
+
+\subsection{Метод Крамера}
+\begin{frame}{Метод Крамера}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[height=0.6\textheight]{Gabriel_Cramer.png}
+\end{minipage}
+\begin{minipage}{0.55\textwidth}
+\centering
+\structure{Габриэль Крамер}
+
+(Gabriel Cramer)
+
+31 июля 1704 -- 4 января 1752
+
+\bigskip
+\begin{itemize}
+\item Предложил метод вычисления определителя, не называя его.
+\item Предложил метод решения систем линейных уравнений.
+\item Провёл классификацию алгебраических кривых вплоть до пятого порядка.
+
+\end{itemize}
+\end{minipage}
+
+\end{frame}
+\begin{frame}[allowframebreaks]{Школьное решение СЛУ}
+\begin{block}{}
+Решить СЛУ: 
+$
+\left\lbrace
+\begin{aligned}
+	a_{11}x+a_{12}y &= b_1,\\
+	a_{21}x+a_{22}y &= b_2,\\
+\end{aligned}
+\right.
+$
+\end{block}
+Решим систему методом сложения:
+\begin{itemize}
+\item Устраним $y$ 
+
+$
+\left\lbrace
+\begin{aligned}
+	a_{11}x+a_{12}y &= b_1\: | \cdot a_{22},\\
+	a_{21}x+a_{22}y &= b_2\: | \cdot a_{22},\\
+\end{aligned}
+\right. \Leftrightarrow
+{}-\!\!\left\lbrace
+\begin{aligned}
+	a_{11}a_{22}x+a_{12}a_{22}y &= b_1a_{22},\\
+	a_{21}a_{12}x+a_{22}a_{12}y &= b_2a_{12}.\\
+\end{aligned}
+\right.
+$
+$$
+	(a_{11}a_{22}-a_{21}a_{12})x  = b_1a_{22} - b_2a_{12},
+$$
+
+Если $\Delta=a_{11}a_{22}-a_{21}a_{12} \neq 0$, то
+$$
+	x= \frac{b_1a_{22} - b_2a_{12}}{a_{11}a_{22}-a_{21}a_{12}},
+$$
+
+\item Устраним $x$ 
+
+$
+\left\lbrace
+\begin{aligned}
+	a_{11}x+a_{12}y &= b_1\: | \cdot a_{21},\\
+	a_{21}x+a_{22}y &= b_2\: | \cdot a_{11},\\
+\end{aligned}
+\right. \Leftrightarrow
+{}-\!\!\left\lbrace
+\begin{aligned}
+	a_{11}a_{21}x+a_{12}a_{21}y &= b_1a_{21},\\
+	a_{21}a_{11}x+a_{22}a_{11}y &= b_2a_{11}.\\
+\end{aligned}
+\right.
+$
+$$
+	\begin{aligned}
+	(a_{12}a_{21}-a_{22}a_{11})y  &= b_1a_{21} - b_2a_{11}\:|\cdot(-1),\\
+	(a_{11}a_{22}-a_{21}a_{12})y  &= b_1a_{21} - b_2a_{11},
+	\end{aligned}
+$$
+
+Если $\Delta=a_{11}a_{22}-a_{21}a_{12} \neq 0$, то
+
+$$
+	y= \frac{  b_2a_{11} - b_1a_{21}}{a_{11}a_{22}-a_{21}a_{12}},
+$$
+
+\framebreak
+\item 
+	Итак,
+	если $$
+	\Delta=a_{11}a_{22}-a_{21}a_{12} 
+	= \begin{vmatrix}
+	a_{11} & a_{12}\\ a_{21} & a_{22}
+	\end{vmatrix}
+	\neq 0,
+	$$
+	то
+	$$
+	\begin{aligned}
+		x &= \frac{b_1a_{22} - b_2a_{12}}{a_{11}a_{22}-a_{21}a_{12}}
+		=\frac{\begin{vmatrix}
+			b_{1} & a_{12}\\ b_{2} & a_{22}
+			\end{vmatrix}}{\begin{vmatrix}
+			a_{11} & a_{12}\\ a_{21} & a_{22}
+			\end{vmatrix}}
+		=\frac{\Delta_1}{\Delta}
+		,\\
+		y &= \frac{  b_2a_{11} - b_1a_{21}}{a_{11}a_{22}-a_{21}a_{12}},
+		=\frac{\begin{vmatrix}	a_{11} & b_{1}\\ a_{22} &  b_{2}			\end{vmatrix}}{\begin{vmatrix}
+			a_{11} & a_{12}\\ a_{21} & a_{22}
+			\end{vmatrix}}	
+		=\frac{\Delta_2}{\Delta}
+	\end{aligned}
+	$$
+\end{itemize}
+
+
+\end{frame}
+\begin{frame}{Метод Крамера}
+\begin{block}{Теорема (правило Крамера)}
+\itshape Если в СЛУ число уравнений равно числу переменных и определитель матрицы коэффициентов $\Delta=\det(A)\neq 0$, то рассматриваемая система имеет одно и только одно решение:
+$$
+x_1=\frac{\Delta_1}{\Delta},
+\qquad
+x_2=\frac{\Delta_2}{\Delta},
+\qquad
+\ldots 
+\qquad
+x_n=\frac{\Delta_n}{\Delta},
+$$
+где  определитель $\Delta_i$ получается из определителя матрицы коэффициентов $\Delta$ заменой $i$-го столбца на столбец свободных членов:
+
+\end{block}
+$$
+\Delta_1 =
+\left(\begin{array}{>{\color{vgured}}cccc} 
+			b_{1} & a_{12} & \cdots & a_{1n}\\
+			b_{2} & a_{22} & \cdots & a_{2n}\\
+			\cdots &\cdots &\cdots &\cdots \\
+			b_{n} & a_{n2} & \cdots & a_{nn}\\
+		\end{array}\right),\quad
+\Delta_2= \left(\begin{array}{c>{\color{vgured}}ccc} 
+			a_{11} & b_{1} & \cdots & a_{1n}\\
+			 a_{21} & b_{2} &\cdots & a_{2n}\\
+			\cdots &\cdots &\cdots &\cdots \\
+			 a_{n1} & b_{n} &\cdots & a_{nn}\\
+		\end{array}\right),\ldots
+$$
+
+\end{frame}
+\begin{frame}[allowframebreaks]{Пример правила Крамера}
+\begin{exampleblock}{Задача}
+Решить СЛУ: 
+$
+\left\lbrace
+\begin{aligned}
+	x_1+2x_2-x_3 &= 2,\\
+	2x_1-3x_2+2x_3 &= 2,\\
+	3x_1+x_2+x_3 &= 8,\\
+\end{aligned}
+\right.
+$
+\end{exampleblock}
+Число переменных равно числу уравнений. Метод Крамера применим.
+	$$
+		\Delta = 
+		\begin{vmatrix}
+			 1 & 2& -1\\
+			 2 & -3& 2\\
+			 3 & 1& 1\\
+		\end{vmatrix}
+		 = -3+12-2-9-2-4=-8 \neq 0
+	$$
+	СЛУ имеет единственное решение
+	\framebreak
+	\begin{align*}
+		\Delta_1 &= 
+		\left|\begin{array}{>{\color{vgured}}ccc}
+			 2 & 2& -1\\
+			 2 & -3& 2\\
+			 8 & 1& 1\\
+		\end{array}\right|
+		 = -6+32-2-24-4-4=-8,
+		 \\
+		\Delta_2 &= 
+		\left|\begin{array}{c>{\color{vgured}}cc}
+			 1 & 2& -1\\
+			 2 & 2& 2\\
+			 3 & 8& 1\\
+		\end{array}\right|
+		 = 2+12-16+6-16-4=-16,
+		\\
+		\Delta_3 &= 
+		\left|\begin{array}{cc>{\color{vgured}}c}
+			 1 & 2& 2\\
+			 2 & -3& 2\\
+			 3 & 1& 8\\
+		\end{array}\right|
+		 = -24+12+4+18-2-32 =-24.
+	\end{align*}
+
+	\begin{gather*}
+		x_1 =\frac{\Delta_1}{\Delta}=\frac{-8}{-8}=1,\qquad
+		x_2 =\frac{\Delta_2}{\Delta}=\frac{-16}{-8}=2,\\
+		x_3 =\frac{\Delta_n}{\Delta}=\frac{-24}{-8}=3.
+	\end{gather*}
+	\structure{Ответ:} \alert{$(x_1,x_2,x_3)= (1,2,3)$}
+\end{frame}
+
+
+
+\subsection{Метод Гаусса}
+\begin{frame}{Метод Гаусса}
+\begin{minipage}{0.4\textwidth}
+\includegraphics[height=0.6\textheight]{Carl_Friedrich_Gauss.png}
+\end{minipage}
+\begin{minipage}{0.55\textwidth}
+{\centering
+\structure{Иоганн Карл Фридрих Гаусс}
+(Johann Carl Friedrich Gauß)
+
+30 апреля 1777 -- 23 февраля 1855
+\par}
+\bigskip
+
+ Фундаментальные исследования почти во всех основных областях математики: алгебре, теории чисел, дифференциальной и неевклидовой геометрии, математическом анализе, теории функций комплексного переменного, теории вероятностей, в аналитической и небесной механике, астрономии, физике, геодезии.
+\end{minipage}
 \end{frame}
 
 %\begin{frame}{Эквивалентные преобразования СЛУ}{}
@@ -195,7 +593,9 @@
 \begin{frame}{Элементарные преобразования СЛУ}
 \begin{enumerate}
 \item 
-	Исключить из СЛУ \alert{тривиальное} уравнение  $0x_1+0x_2+\ldots+0x_n=0$.
+	Исключить из СЛУ \alert{тривиальное} уравнение  
+	$$0x_1+0x_2+\ldots+0x_n=0.
+	$$
 \item 
 	Умножить уравнение системы на число $\lambda \neq 0$
 \item 
@@ -580,15 +980,15 @@
 \item $x_2$, $x_3$~--- свободные
 \end{itemize}
 \end{frame}
-\begin{frame}{Разрешенная система уравнений}
-Система линейных уравнений называется \alert{разрешенной}, если каждое уравнение системы линейных уравнений содержит разрешенную переменную. 
-
-Разрешенная система линейных уравнений всегда совместна.
-
-\begin{block}{}
-Количество базисных переменных не превосходит числа уравнений. 
-\end{block}
-\end{frame}
+%\begin{frame}{Разрешенная система уравнений}
+%Система линейных уравнений называется \alert{разрешенной}, если каждое уравнение системы линейных уравнений содержит разрешенную переменную. 
+%
+%Разрешенная система линейных уравнений всегда совместна.
+%
+%\begin{block}{}
+%Количество базисных переменных не превосходит числа уравнений. 
+%\end{block}
+%\end{frame}
 \begin{frame}[allowframebreaks]{Виды решений СЛУ}{}
 %
 %\begin{block}{}
@@ -695,7 +1095,7 @@
 	\end{itemize}
 \end{frame}
 
-
+\section{Исследование СЛУ}
 \begin{frame}{Исследование СЛУ}
 
 \begin{itemize}
@@ -726,7 +1126,7 @@ $$
 \end{theorem}
 \end{frame}
 
-\section{Приведение к разрешенному виду}
+\subsection{Приведение к разрешенному виду}
 
 
 
@@ -768,7 +1168,7 @@ $$
 %\end{frame}
 
 
-\section{Переход от одного базиса к другому.}
+\subsection{Переход от одного базиса к другому}
 
 \begin{frame}[allowframebreaks,fragile]{Переход от базиса к базису. Пример}
 
@@ -892,7 +1292,7 @@ $$
 	\end{exampleblock}
 	\begin{itemize}
 	\item 
-		Решая СЛУ методом жордана---Гаусса получаем:
+		Решая СЛУ методом Жордана---Гаусса получаем:
 			$
 				\left\lbrace
 				\begin{aligned}
@@ -976,7 +1376,7 @@ $$
 					$$	
 			\end{itemize}
 \end{frame}
-\section{Переход от одного опорного решения к другому}
+\subsection{Переход от одного опорного решения к другому}
 \begin{frame}{Опорное решение}
 Базисное решение СЛУ, у которого значения переменных неотрицательны называется \alert{опорным решением}.
 
@@ -1163,37 +1563,26 @@ $$
 %	\end{frame}
 	
 \section{Резюме лекции и домашнее задание}
-\begin{frame}{Резюме}
-	После проработки лекции вы должны уметь:
-	\begin{itemize}
-	\item 
-		выполнять сложение, умножение, транспонирование матриц;
-	\item 
-		вычислять определитель 2 3 и 4 порядков по определению и с помощью приведения к треугольному виду;
-	\item 
-		решать системы уравнений матричным способом и по правилу Крамера.
-	\end{itemize}		
-\end{frame}
-
-
-\begin{frame}{Задание}
-Для завершения лекции вам необходимо подготовить конспект, в который должны войти:
-	\begin{enumerate}
-		\item 
-			Понятие матрицы и операции над матрицами: привести пример или краткую запись правила выполнения каждой операции, достаточную, чтобы восстановить метод вычисления.
-		\item 
-			Матрицы в экономике. Разобрать задачу 1.70 на стр. 130 Практикума [2]
-		\item 
-			Определение определителя. 
-			Примеры вычисления определителей 2го, 3го, 4го порядков понятые вам. 
-		\item 
-			Ранг матрицы и его нахождение. (Стр. 29--35 учебника [1])
-		\item 
-			Обратная матрица и ее нахождение. Формула.
-		\item 
-			СЛУ. Что значит решить СЛУ. Метод Крамера решения СЛУ. Формулы. Пример.
-	\end{enumerate}
-\end{frame}
+%\begin{frame}{Резюме}
+%	После проработки лекции вы должны уметь:
+%	\begin{itemize}
+%	\item 
+%		выполнять сложение, умножение, транспонирование матриц;
+%	\item 
+%		вычислять определитель 2 3 и 4 порядков по определению и с помощью приведения к треугольному виду;
+%	\item 
+%		решать системы уравнений матричным способом и по правилу Крамера.
+%	\end{itemize}		
+%\end{frame}
+%
+%
+%\begin{frame}{Задание}
+%Для завершения лекции вам необходимо подготовить конспект, в который должны войти:
+%	\begin{enumerate}
+%		\item 
+%			СЛУ. Что значит решить СЛУ. Метод Крамера решения СЛУ. Формулы. Пример.
+%	\end{enumerate}
+%\end{frame}
 \begin{frame}{Источники информации}
 \begin{itemize}
 \item 
@@ -1207,18 +1596,18 @@ $$
 %\subsection{Переход от одного опорного решения  к другому}
 \end{frame}
 
-\begin{frame}{Анонс:}
-	На следующей лекции:
-	\begin{itemize}
-	\item 
-		научимся решать произвольные системы линейных уравнений;
-	\item 
-		вспомним, как строится прямая на плоскости;
-	\item 
-		научимся решать системы линейных неравенств.
-	\end{itemize}
-
-\end{frame}
+%\begin{frame}{Анонс:}
+%	На следующей лекции:
+%	\begin{itemize}
+%	\item 
+%		научимся решать произвольные системы линейных уравнений;
+%	\item 
+%		вспомним, как строится прямая на плоскости;
+%	\item 
+%		научимся решать системы линейных неравенств.
+%	\end{itemize}
+%
+%\end{frame}
 
 
 

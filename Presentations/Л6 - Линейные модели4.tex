@@ -1922,8 +1922,8 @@ $$
 	\only<3->{
 		\begin{tikzpicture}[remember picture, overlay]
 		\coordinate (A) at (3.3,6);
-		\coordinate (B) at (8.15,6);	
-		\coordinate (C) at (8.15,5.1);	
+		\coordinate (B) at (8.35,6);	
+		\coordinate (C) at (8.35,5.1);	
 		\coordinate (D) at (3.3,5.1);	
 		\draw[line width=1pt,red] (A) -- (B) --(C) -- (D) --cycle;
 		\filldraw[line width=1pt,draw = red,fill=white] 
@@ -1936,10 +1936,10 @@ $$
 		(D) circle[radius=2mm] node{$-$};
 		\only<4->{\draw[line width=1pt,blue] (B)+(-0.4,-0.3) circle[radius = 2.5mm];}
 		\only<5->{
-			\draw[blue] (B)+(0.1,-0.3) node{$\bf-15$};
-			\draw[blue] (D)+(0.1,-0.3) node{$\bf-15$};
-			\draw[blue] (A)+(0.1,-0.3) node{$\bf+15$};
-			\draw[blue] (C)+(0.1,-0.3) node{$\bf+15$};
+			\filldraw[blue] (B)+(0.4,-0.2) node{$\bf-15$};
+			\draw[blue] (D)+(0.3,-0.3) node{$\bf-15$};
+			\draw[blue] (A)+(0.5,-0.3) node[rounded corners,fill=white,opacity=0.8]{\small$\bf+15$};
+			\draw[blue] (C)+(0.2,-0.3) node{$\bf+15$};
 		}
 		
 		\end{tikzpicture}

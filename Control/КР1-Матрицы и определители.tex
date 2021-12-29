@@ -1,0 +1,186 @@
+%encoding=utf8%
+\documentclass[a5paper,17pt]{extarticle}
+
+% Русская кодировка
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,colorlinks,urlcolor=blue, citecolor=magenta]{hyperref}
+%        \pdfcompresslevel=9 % сжимать PDF
+
+% необходимые модули
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage[margin=5mm]{geometry}
+\usepackage{enumitem}
+\setlist{noitemsep,leftmargin=\parindent}
+
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{\CYRM}
+\AddEnumerateCounter{\asbuk}{\@asbuk}{\cyrm}
+\newlist{noitemsep,dotenumerate}{enumerate}{10}
+\setlist[enumerate,1]{label=\arabic*., ref=\arabic*} %списки со скобками
+\setlist[enumerate,2]{label=\asbuk*), ref=(\asbuk*)} %списки со скобками
+
+\usepackage{environ}
+
+\NewEnviron{LOOP}[1]{
+  \newcounter{nclone}
+  \setcounter{nclone}{#1} 
+  \par
+  \loop
+    \BODY
+  \addtocounter{nclone}{-1}
+  \ifnum \value{nclone}>0 \repeat}
+
+%Полуторный интервал
+\renewcommand{\baselinestretch}{1.00}
+\pagestyle{empty}
+
+\begin{document}
+%\begin{LOOP}{4}
+\begin{enumerate}
+{\item[]\centering \small Практическое занятие \textnumero~7 
+\par\bfseries Проверочная работа <<Матрицы и определители>>\par}
+
+\item Вычислите $2A+3B+E$,\\ если
+$A=\begin{pmatrix}3&1\\4&-2\end{pmatrix}$ 
+$B=\begin{pmatrix}0&2\\-5&7\end{pmatrix}$.
+\item Найдите произведения матриц:~$CD$ и~$DC^T$,\\ если
+$C=\begin{pmatrix}2&-3\\4 & 0 \\ 5&6 \end{pmatrix} $
+$D=\begin{pmatrix}-2&0\\7&3\end{pmatrix}$.
+
+\item Решите уравнение в комплексных числах: \\
+$\begin{vmatrix}
+1 & z & z \\
+1 & 0 & z \\
+z & z & 1 \\
+\end{vmatrix}=0$.
+
+\item Вычислите определитель $
+\begin{vmatrix}
+1 & 0 & 1 & 5\\
+0 & 1 & 11 & 9\\
+3 & -1 & -2 & 1\\
+2 & 0 & 7 & 0\\
+\end{vmatrix}.
+$
+\item Найдите $A^{-1}$, если
+$A=\begin{pmatrix}-1 & -1 & 3\\ 3 & -1 & -1\\ -1 & 3 & -1\end{pmatrix}$.
+\item Вычислить $\frac{1}{5^4}\left|A^{4}\right|$, если $A=\begin{pmatrix}i+1 & -1 & i\\ 2i & 2 & 2i+1\\ -i & i & -1\end{pmatrix}$.
+\end{enumerate}
+\newpage
+
+\begin{enumerate}
+{\item[]\centering \small Практическое занятие \textnumero~7 
+\par\bfseries Проверочная работа <<Матрицы и определители>>\par}
+
+\item Вычислите: $5A-2B-E$,\\ если
+$A=\begin{pmatrix}0&-3\\4&-21\end{pmatrix}$,
+$B=\begin{pmatrix}2&8\\-5&10\end{pmatrix}$.
+
+\item Найдите произведения матриц: $CD$ и~$DC^T$,\\ если
+$C=\begin{pmatrix}5&3\\4 & 1\\ 7 & 0\\ \end{pmatrix}$, 
+$D=\begin{pmatrix}5&2\\-3&0\end{pmatrix}$ .
+
+\item Решите уравнение в комплексных числах: \\
+$\begin{vmatrix}
+1& 1& 1\\
+-z^2& z^3+2& -z^3\\
+1& 0& 0
+\end{vmatrix}=0$
+
+
+
+\item Вычислите определитель $
+\begin{vmatrix}
+1 & 0 & 3 & 5 \\
+0 & 1 & 3 & 12\\
+0 & -1 & 1 & 0\\
+5 & 0 & 4 & 1\\
+\end{vmatrix}.
+$
+
+\item Найдите $A^{-1}+4E$, если
+$A=\begin{pmatrix}1 & 2 & 1\\ 1 & 1 & 2\\ 2 & 1 & 1\end{pmatrix}$.
+
+
+\item Вычислить $\frac{1}{3^{8}}\left| A^{8}\right|$, если $A=\begin{pmatrix}i & 1-i & 1\\ 1-i & i & -1+i\\ 1 & 1-i & 2\end{pmatrix}$.
+\end{enumerate}
+\newpage
+
+
+
+\begin{enumerate}
+{\item[]\centering \small Практическое занятие \textnumero~7 
+\par\bfseries  Проверочная работа <<Матрицы и определители>>\par}
+\item Вычислите: $2(A-E)-B$, если
+
+$A=\begin{pmatrix}10&4\\4&-15\end{pmatrix}$,
+$B=\begin{pmatrix}0&-3\\-5&6\end{pmatrix}$.
+
+\item Найдите произведения матриц:~$CD$ и~$DC^T$,\\ если
+$C=\begin{pmatrix}0&-12\\ 8 & 1 \\2 & 0 \end{pmatrix}$ , 
+$D=\begin{pmatrix}6&-2\\-5&4\end{pmatrix}$ .
+
+\item Решите уравнение в комплексных числах: \\
+$\begin{vmatrix}
+1 & z & z \\
+z & -1 & z \\
+1 & z & 0 
+\end{vmatrix}=0$.
+
+\item Вычислите определитель $
+\begin{vmatrix}
+2 & -3 & 1 & 5\\
+0 & 1 & 1 & -2\\
+6 & 1 & 0 & 1\\
+1 & 0 & 4 & 0\\
+\end{vmatrix}.
+$
+
+\item Найдите $A^{-1}$, если
+$A=\begin{pmatrix}-3 & -1 & 5\\ -1 & 1 & -1\\ 1 & -1 & -3\end{pmatrix}$.
+
+\item Вычислить $\frac{1}{5^4}\left|A^{4}\right|$, если $A=\begin{pmatrix}i+1 & -1 & i\\ 2i & 2 & 2i+1\\ -i & i & -1\end{pmatrix}$.
+
+\end{enumerate}
+\newpage
+
+
+
+\begin{enumerate}
+{\item[]\centering \small Практическое занятие \textnumero~7 
+\par\bfseries Проверочная работа <<Матрицы и определители>>\par}
+\item Вычислите: $2A-3(B-E)$, если
+$A=\begin{pmatrix}0&1\\9&2\end{pmatrix}$, $B=\begin{pmatrix}1&2\\-5&6\end{pmatrix}$.
+
+\item Найдите произведения матриц:~$CD$ и~$DC^T$,\\ если
+$C=\begin{pmatrix}3&-3\\ 0 & 4 \\5 & 1 \end{pmatrix}$, 
+$D=\begin{pmatrix}-3&2\\1&3\end{pmatrix}$.
+
+\item Решить уравнение в комплексных числах: \\
+$\begin{vmatrix}
+1 & 1 & 1\\ 
+-8 & {z}+2 & -{z}^{3}\\
+ 1 & 0 & 1
+\end{vmatrix}=0$
+\item Вычислите определитель $
+\begin{vmatrix}
+1 & 0 & 1 & 5\\
+2 & 1 & 1 & 12\\
+1 & -2 & 5 & 0\\
+-3 & 2 & 5 & 1\\
+\end{vmatrix}.
+$
+\item Найдите $A^{-1}$, если
+$A=\begin{pmatrix}1 & 2 & 1\\ 1 & -1 & 2\\ 0 & 1 & 1\end{pmatrix}$.
+
+
+\item Вычислить $\frac{1}{81}\left| A^{8}\right|$, если $A=\begin{pmatrix}i & 1-i & 1\\ 1 & 1 & i\\ 1 & 1-i & 2\end{pmatrix}$.
+\end{enumerate}
+%\end{LOOP} 
+
+\end{document}
